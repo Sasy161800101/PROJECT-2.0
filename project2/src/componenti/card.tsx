@@ -2,12 +2,11 @@ type CardProp = {
     nomeProdotto: string
     prezzoProdotto: number
     imgProdotto: string
-    className: string
 }
 
-function Card({nomeProdotto, prezzoProdotto, imgProdotto, className}: CardProp) {
+function Card({nomeProdotto, prezzoProdotto, imgProdotto}: CardProp) {
   return (
-    <a href="#" className={`group relative block overflow-hidden h-full ${className}`}>
+    <a href="#" className={`group relative block h-full `}>
       <button
         className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
       >

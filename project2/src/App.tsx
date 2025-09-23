@@ -4,8 +4,17 @@ import Card from './componenti/card'
 import Footer from './componenti/footer'
 import Navbar from './componenti/navbar'
 
+type Prodotto = {
+  id: number
+  title: string
+  price: number
+  description: string
+  category: string
+  image: string
+}
+
 function App() {
-  const [prodotti, setProdotti] = useState(null)
+  const [prodotti, setProdotti] = useState<Prodotto[] | null>(null)
   useEffect(()=> {
     async function fetchProdotti() {
       const data = await fetch("https://fakestoreapi.com/products")
@@ -20,13 +29,12 @@ function App() {
     <Navbar></Navbar>
     <div className='grid gap-5 auto-rows-fr grid-cols-1 sm:grid-cols-2 md:grid-cols-3'>
     {prodotti && (
-        prodotti.map((prod, index) => (
+        prodotti.map((prod: Prodotto, index:number) => (
           <Card
             key={index}
             nomeProdotto={prod.title}
             prezzoProdotto={prod.price}
             imgProdotto={prod.image}
-            className="h-full"
           />
         ))
       )}
