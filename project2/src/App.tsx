@@ -3,6 +3,8 @@ import './App.css'
 import Card from './componenti/card'
 import Footer from './componenti/footer'
 import Navbar from './componenti/navbar'
+import { HeroSection } from './componenti/heroSection'
+import Filtro from './componenti/filtro'
 
 type Prodotto = {
   id: number
@@ -15,6 +17,7 @@ type Prodotto = {
 
 function App() {
   const [prodotti, setProdotti] = useState<Prodotto[] | null>(null)
+  const [categoriaSelezionata, setCategoriaSelezionata] = useState<string>("all")
   useEffect(()=> {
     async function fetchProdotti() {
       const data = await fetch("https://fakestoreapi.com/products")
@@ -24,12 +27,18 @@ function App() {
     fetchProdotti()
   }, [])
 
+  const prodottiFiltrati = categoriaSelezionata === "all"
+    ? prodotti
+    : prodotti?.filter(prod => prod.category === categoriaSelezionata)
+
   return (
     <>
     <Navbar></Navbar>
+    <HeroSection></HeroSection>
+    <Filtro categoriaSelezionata={categoriaSelezionata} setCategoriaSelezionata={setCategoriaSelezionata}></Filtro>
     <div className='grid gap-5 auto-rows-fr grid-cols-1 sm:grid-cols-2 md:grid-cols-3'>
-    {prodotti && (
-        prodotti.map((prod: Prodotto, index:number) => (
+    {prodottiFiltrati && (
+        prodottiFiltrati.map((prod: Prodotto, index:number) => (
           <Card
             key={index}
             nomeProdotto={prod.title}
