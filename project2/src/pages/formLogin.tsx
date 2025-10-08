@@ -1,16 +1,16 @@
-import { useState } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import { useAuth } from "../context/authProvider";
 
 export function FormLogin() {
     const [credenziali, setCredenziali] = useState({email: "", password: ""})
     const {loginUtente} = useAuth()
 
-    function handleChange(e){
+    function handleChange(e: ChangeEvent<HTMLInputElement>){
         const chiave = e.target.name
         const proprieta = e.target.value
         setCredenziali(prev => ({...prev, [chiave] : proprieta}))
     }
-    function handleLogin(e){
+    function handleLogin(e: FormEvent<HTMLFormElement>){
         e.preventDefault()
         loginUtente(credenziali)
     }

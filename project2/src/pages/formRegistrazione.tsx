@@ -1,13 +1,13 @@
-import { useState } from "react"
+import { useState, type ChangeEvent, type FormEvent } from "react"
 import { useAuth } from "../context/authProvider"
 
 function FormRegistrazione() {
-    const [user, setUser] = useState({nome:"", cognome:"", emai:"", password:""})
+    const [user, setUser] = useState({nome:"", cognome:"", email:"", password:""})
     const {registrazioneUtente} = useAuth()
-    function handleChange(e) {
+    function handleChange(e: ChangeEvent<HTMLInputElement>) {
         setUser(prev=> ({...prev, [e.target.name] : e.target.value}))
     }
-    function handleRegistrati(e) {
+    function handleRegistrati(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
         registrazioneUtente(user)
     }

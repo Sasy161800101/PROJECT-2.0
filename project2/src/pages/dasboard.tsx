@@ -1,8 +1,5 @@
 import { useAuth } from "../context/authProvider";
 import { FormLogin } from "./formLogin";
-import Navbar from "../componenti/navbar";
-import Footer from "../componenti/footer";
-import { ToastContainer } from "react-toastify";
 
 export function Dashboard() {
   const { currentUser, logoutUtente } = useAuth();
@@ -18,7 +15,7 @@ export function Dashboard() {
       <div
         style={{
           minHeight: "80vh",
-          backgroundColor: "#111827",
+          backgroundColor: "white",
           padding: "40px 20px",
           color: "white",
         }}
