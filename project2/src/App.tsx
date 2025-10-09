@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import FormRegistrazione from './pages/formRegistrazione'
 import { Dashboard } from './pages/dasboard'
+import Cart from './pages/cart'
 
 type Prodotto = {
   id: number
@@ -57,7 +58,8 @@ function App() {
         ))
       )}
       </div> */}
-      <Dashboard></Dashboard>
+      <Cart></Cart>
+      {/* <Dashboard></Dashboard> */}
       {/* <FormLogin></FormLogin>  */}
       {/* <FormRegistrazione></FormRegistrazione> */}
       <ToastContainer position="top-right" autoClose={2000} />
