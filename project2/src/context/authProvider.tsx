@@ -1,14 +1,17 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {toast} from "react-toastify"
 export const AuthContext = createContext()
 
 export function AuthProvider({children}){
     const [users, setUsers] = useState(JSON.parse(localStorage.getItem("users")) || [])
     const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("currentUser")) || null)
+    const navigate = useNavigate()
         function registrazioneUtente(user){
         const userExist = users.find((x) => x.email === user.email)
         if(userExist){
             toast.error("utente già registrato")
+            setTimeout(() => {navigate("/login")}, 3000)
         }else{
             setUsers(prev => [...prev, user] )
             toast.success("registrazione avvenuta con successo")
@@ -20,6 +23,7 @@ export function AuthProvider({children}){
         if(user){
             setCurrentUser(user)
             toast.success("accesso effettuato")
+            setTimeout( ()=> {navigate("/dashboard")}, 3000)
         }else{
             toast.error("credenziali errate")
         }
