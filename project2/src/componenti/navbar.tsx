@@ -1,3 +1,4 @@
+import { Link, NavLink } from "react-router-dom"
 import CartIcon from "./cartIcon"
 
 function Navbar() {
@@ -17,16 +18,16 @@ function Navbar() {
         <nav aria-label="Global" className="flex items-center gap-6">
   <ul className="flex items-center gap-6 text-sm">
     <li>
-      <a className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" href="#">Home</a>
+      <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/">Home</NavLink>
     </li>
     <li>
-      <a className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" href="#">Product</a>
+      <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/prodotti">Product</NavLink>
     </li>
     <li>
-      <a className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" href="#">About</a>
+      <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/about">About</NavLink>
     </li>
     <li>
-      <a className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" href="#">Contact</a>
+      <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/contatti">Contact</NavLink>
     </li>
   </ul>
 </nav>
@@ -34,20 +35,20 @@ function Navbar() {
       <div className="flex items-center gap-4">
         <CartIcon></CartIcon>
         <div className="sm:flex sm:gap-4">
-          <a
+          <Link
             className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm dark:hover:bg-teal-500"
-            href="#"
+            to="/login"
           >
             Login
-          </a>
+          </Link>
 
           <div className="hidden sm:flex">
-            <a
+            <Link
               className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
-              href="#"
+              to="/registrazione"
             >
               Register
-            </a>
+            </Link>
           </div>
         </div>
 

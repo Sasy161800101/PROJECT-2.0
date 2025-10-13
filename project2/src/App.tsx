@@ -12,6 +12,10 @@ import { ToastContainer } from "react-toastify";
 import FormRegistrazione from './pages/formRegistrazione'
 import { Dashboard } from './pages/dasboard'
 import Cart from './pages/cart'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Home from './pages/Home'
+import Private from './componenti/private'
+
 
 type Prodotto = {
   id: number
@@ -41,9 +45,16 @@ function App() {
   //   : prodotti?.filter(prod => prod.category === categoriaSelezionata)
 
   return (
-    <>
+    
+    <BrowserRouter>
     <AuthProvider>
     <Navbar></Navbar>
+    <Routes>
+      <Route path='/' element={<Home></Home>}></Route>
+      <Route path='/login' element={<FormLogin></FormLogin>}></Route>
+      <Route path='/registrazione' element={<FormRegistrazione></FormRegistrazione>}></Route>
+      <Route path='/dashboard' element={<Private><Dashboard></Dashboard></Private>}></Route>
+    </Routes>
     {/* <HeroSection></HeroSection>
     <Filtro categoriaSelezionata={categoriaSelezionata} setCategoriaSelezionata={setCategoriaSelezionata}></Filtro>
     <div className='grid gap-5 auto-rows-fr grid-cols-1 sm:grid-cols-2 md:grid-cols-3'>
@@ -58,14 +69,15 @@ function App() {
         ))
       )}
       </div> */}
-      <Cart></Cart>
+      {/* <Cart></Cart> */}
       {/* <Dashboard></Dashboard> */}
       {/* <FormLogin></FormLogin>  */}
       {/* <FormRegistrazione></FormRegistrazione> */}
       <ToastContainer position="top-right" autoClose={2000} />
     <Footer></Footer>
     </AuthProvider>
-    </>
+    </BrowserRouter>
+    
   )
 }
 

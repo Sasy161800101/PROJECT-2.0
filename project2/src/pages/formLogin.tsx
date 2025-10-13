@@ -1,5 +1,6 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { useAuth } from "../context/authProvider";
+import { Link } from "react-router-dom";
 
 export function FormLogin() {
     const [credenziali, setCredenziali] = useState({email: "", password: ""})
@@ -75,7 +76,7 @@ export function FormLogin() {
              type="submit">Login</button>
              <p style={{
                 color: "#111827"
-             }}>Non sei registrato? <a>Registrati!</a></p>
+             }}>Non sei registrato? <Link className="text-teal-600" to="/registrazione"> Registrati!</Link></p>
       </form>
     </div>
     </>)

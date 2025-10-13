@@ -5,9 +5,9 @@ export function Dashboard() {
   const { currentUser, logoutUtente } = useAuth();
 
   // SE NON ESISTE CURRENTUSER ESCE FORMLOGIN
-  if (!currentUser) {
-    return <FormLogin />;
-  }
+  // if (!currentUser) {
+  //   return <FormLogin />;
+  // }
 
   // ALTRIMENTI DASHBOARD
   return (
