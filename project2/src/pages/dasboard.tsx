@@ -1,15 +1,8 @@
 import { useAuth } from "../context/authProvider";
-import { FormLogin } from "./formLogin";
 
 export function Dashboard() {
-  const { currentUser, logoutUtente } = useAuth();
+  const { logoutUtente } = useAuth();
 
-  // SE NON ESISTE CURRENTUSER ESCE FORMLOGIN
-  // if (!currentUser) {
-  //   return <FormLogin />;
-  // }
-
-  // ALTRIMENTI DASHBOARD
   return (
     <>
       <div

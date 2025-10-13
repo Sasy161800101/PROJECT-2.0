@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom"
+
 function Footer() {
     return(<>
     <footer className="bg-gray-100">
@@ -13,19 +15,19 @@ function Footer() {
 
     <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
       <li>
-        <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> Home </a>
+        <NavLink className="text-gray-700 transition hover:text-gray-700/75" to="/"> Home </NavLink>
       </li>
 
       <li>
-        <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> Product </a>
+        <NavLink className="text-gray-700 transition hover:text-gray-700/75" to="/products"> Product </NavLink>
       </li>
 
       <li>
-        <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> About </a>
+        <NavLink className="text-gray-700 transition hover:text-gray-700/75" to="/about"> About </NavLink>
       </li>
 
       <li>
-        <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> Contact </a>
+        <NavLink className="text-gray-700 transition hover:text-gray-700/75" to="/contact"> Contact </NavLink>
       </li>
     </ul>
 

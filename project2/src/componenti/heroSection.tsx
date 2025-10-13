@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-teal-50 to-teal-100">
@@ -15,9 +17,9 @@ export function HeroSection() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="#"
-                className="group inline-flex items-center justify-center rounded-md bg-teal-600 px-6 py-3 text-white text-lg font-medium transition-transform hover:bg-teal-700"
+              <NavLink
+                to="/products"
+                className="group inline-flex items-center justify-center rounded-md bg-teal-600 px-50 py-3 text-white text-lg font-medium transition-transform hover:bg-teal-700"
               >
                 Scopri le Maglie
                 <svg
@@ -30,14 +32,14 @@ export function HeroSection() {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </a>
+              </NavLink>
 
-              <a
+              {/* <a
                 href="#"
                 className="inline-flex items-center justify-center rounded-md border border-teal-600 px-6 py-3 text-lg font-medium text-teal-600 hover:bg-teal-50"
               >
                 Filtra per Squadra
-              </a>
+              </a> */}
             </div>
           </div>
 

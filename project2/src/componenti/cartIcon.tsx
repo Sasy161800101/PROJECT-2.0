@@ -4,9 +4,8 @@ function CartIcon() {
     return(<>
     <Link
 className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm dark:hover:bg-teal-500"
-  to="/carrello"
->
-  
+  to="/carrello">
+    
   <i className="fa fa-shopping-cart" style={{fontSize:"18px"}}></i>
 </Link>
     </>)
