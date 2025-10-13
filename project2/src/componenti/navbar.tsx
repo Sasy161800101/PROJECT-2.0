@@ -21,7 +21,7 @@ function Navbar() {
       <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/">Home</NavLink>
     </li>
     <li>
-      <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/prodotti">Product</NavLink>
+      <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/products">Product</NavLink>
     </li>
     <li>
       <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/about">About</NavLink>

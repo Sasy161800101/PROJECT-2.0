@@ -15,6 +15,7 @@ import Cart from './pages/cart'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Private from './componenti/private'
+import Products from './pages/products'
 
 
 
@@ -34,6 +35,7 @@ function App() {
       <Route path='/dashboard' element={<Private><Dashboard></Dashboard></Private>}></Route>
       <Route path='/carrello' element={<Private><Cart></Cart></Private>}></Route>
       <Route path='*' element={<Navigate to={"/"}></Navigate>}></Route>
+      <Route path='/products' element={<Products></Products>}></Route>
     </Routes>
       <ToastContainer position="top-right" autoClose={2000} />
     <Footer></Footer>
