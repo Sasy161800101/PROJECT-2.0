@@ -44,11 +44,12 @@ function Products(){
       <div className='grid gap-5 auto-rows-fr grid-cols-1 sm:grid-cols-2 md:grid-cols-3'>
         {prodottiFiltrati.map(prod => (
           <Card
-            key={prod.id}
-            nomeProdotto={prod.title}
-            prezzoProdotto={prod.price}
-            imgProdotto={prod.image}
-            descrizioneProdotto={prod.description}
+          id= {prod.id}
+          key={prod.id}
+          nomeProdotto={prod.title}
+          prezzoProdotto={prod.price}
+          imgProdotto={prod.image}
+          descrizioneProdotto={prod.description}
           />
         ))}
       </div>

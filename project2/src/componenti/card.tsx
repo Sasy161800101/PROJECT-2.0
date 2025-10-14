@@ -1,13 +1,16 @@
+import { Link } from "react-router-dom"
+
 type CardProp = {
     nomeProdotto: string
     prezzoProdotto: number
     imgProdotto: string
     descrizioneProdotto: string // da aggiungere!
+    id: number
 }
 
-function Card({nomeProdotto, prezzoProdotto, imgProdotto}: CardProp) {
+function Card({id, nomeProdotto, prezzoProdotto, imgProdotto}: CardProp) {
   return (
-    <a href="#" className={`group relative block h-full `}>
+    <Link to={`/prodotto/${id}`} className={`group relative block h-full `}>
       <button
         className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
       >
@@ -42,12 +45,12 @@ function Card({nomeProdotto, prezzoProdotto, imgProdotto}: CardProp) {
             <button
               className="block w-full rounded-sm bg-teal-600 p-4 text-white font-medium transition hover:scale-105"
             >
-              Add to Cart
+              Aggiungi al carrello
             </button>
           </form>
         </div>
       </div>
-    </a>
+    </Link>
   )
 }
 

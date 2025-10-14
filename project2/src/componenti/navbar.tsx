@@ -21,13 +21,13 @@ function Navbar() {
       <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/">Home</NavLink>
     </li>
     <li>
-      <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/products">Product</NavLink>
+      <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/products">Prodotti</NavLink>
     </li>
     <li>
-      <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/about">About</NavLink>
+      <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/about">Su di Noi</NavLink>
     </li>
     <li>
-      <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/contact">Contact</NavLink>
+      <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/contact">Contatti</NavLink>
     </li>
   </ul>
 </nav>
@@ -47,7 +47,7 @@ function Navbar() {
               className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
               to="/registrazione"
             >
-              Register
+              Registrati
             </Link>
           </div>
         </div>
