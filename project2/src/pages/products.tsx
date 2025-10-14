@@ -52,6 +52,10 @@ function Products(){
           />
         ))}
       </div>
+      {prodottiFiltrati.length === 0 &&
+        <p className="text-center text-gray-600 mt-8 text-lg">
+          Nessun prodotto trovato, utilizza meno filtri o rimuovi tutto.
+        </p>}
     </>
   )
 }

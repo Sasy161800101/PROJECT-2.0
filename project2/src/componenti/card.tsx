@@ -2,6 +2,7 @@ type CardProp = {
     nomeProdotto: string
     prezzoProdotto: number
     imgProdotto: string
+    descrizioneProdotto: string // da aggiungere!
 }
 
 function Card({nomeProdotto, prezzoProdotto, imgProdotto}: CardProp) {
