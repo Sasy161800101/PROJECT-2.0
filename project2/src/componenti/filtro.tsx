@@ -28,7 +28,7 @@ const Filtro = ({
           id="categoria"
           value={categoriaSelezionata}
           onChange={(e) => setCategoriaSelezionata(e.target.value)}
-          className="border rounded p-2"
+          className="text-gray-700"
         >
           <option value="all">Tutte le squadre</option>
           {categorie.map((cat) => (
@@ -43,7 +43,7 @@ const Filtro = ({
           id="nazione"
           value={nazioneSelezionata}
           onChange={(e) => setNazioneSelezionata(e.target.value)}
-          className="border rounded p-2"
+          className="text-gray-700"
         >
           <option value="all">Tutte le nazioni</option>
           {nazioni.map((naz) => (

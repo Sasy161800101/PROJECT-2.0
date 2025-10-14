@@ -1,18 +1,19 @@
 import { Link } from "react-router-dom"
 
 type CardProp = {
-    nomeProdotto: string
-    prezzoProdotto: number
-    imgProdotto: string
-    descrizioneProdotto: string // da aggiungere!
-    id: number
+  nomeProdotto: string
+  prezzoProdotto: number
+  imgProdotto: string
+  descrizioneProdotto: string
+  id: number
 }
 
-function Card({id, nomeProdotto, prezzoProdotto, imgProdotto}: CardProp) {
+function Card({ id, nomeProdotto, prezzoProdotto, imgProdotto }: CardProp) {
   return (
-    <Link to={`/prodotto/${id}`} className={`group relative block h-full `}>
+    <div className="group relative block h-full p-3">
       <button
         className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
+        onClick={(e) => e.stopPropagation()}
       >
         <span className="sr-only">Wishlist</span>
         <svg
@@ -31,26 +32,44 @@ function Card({id, nomeProdotto, prezzoProdotto, imgProdotto}: CardProp) {
         </svg>
       </button>
 
-      <div className="flex flex-col h-full">
+      <Link to={`/prodotto/${id}`} className="block">
         <img
           src={imgProdotto}
           alt={nomeProdotto}
           className="w-full h-48 object-contain transition duration-500 group-hover:scale-105"
         />
+        <h3 className="mt-4 text-lg font-medium text-gray-900 line-clamp-2 px-4">{nomeProdotto}</h3>
+        <p className="mt-1.5 text-sm text-gray-700 px-4">{prezzoProdotto} €</p>
+      </Link>
 
-        <div className="relative bg-white p-6 flex flex-col flex-1"> 
-          <h3 className="mt-4 text-lg font-medium text-gray-900 line-clamp-2">{nomeProdotto}</h3>
-          <p className="mt-1.5 text-sm text-gray-700 mt-auto">{prezzoProdotto} €</p>
-          <form className="mt-4">
-            <button
-              className="block w-full rounded-sm bg-teal-600 p-4 text-white font-medium transition hover:scale-105"
+      <div onClick={(e) => e.stopPropagation()} className="px-6">
+        <form className="flex items-end gap-4">
+          <div className="flex-1">
+            <select
+              name={`Headline-${id}`}
+              id={`Headline-${id}`}
+              className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
             >
-              Aggiungi al carrello
-            </button>
-          </form>
-        </div>
+              <option value="">Seleziona la taglia</option>
+                <option value="XXS">XXS</option>
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+            </select>
+          </div>
+
+          <button
+            type="button"
+            className="self-end rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-teal-500"
+          >
+            <i className="fa fa-shopping-cart" style={{ fontSize: "18px" }}></i>
+          </button>
+        </form>
       </div>
-    </Link>
+    </div>
   )
 }
 

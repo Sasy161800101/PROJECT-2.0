@@ -15,9 +15,9 @@ function Prodotto () {
     function addToCart() {
         const productExist = carrello.find((x)=> x.id === prodotto.id)
         if (productExist) {
-            const quantity = productExist.quantity + 1
-            const nuovoProdotto = {...productExist, quantity: quantity}
-            setCarrello((prev)=> [...prev, nuovoProdotto])
+            productExist.quantity ++
+            // const nuovoProdotto = {...productExist, quantity: quantity}
+            setCarrello((prev)=> [...prev])
             console.log(carrello)
         } else {
             setCarrello((prev) => [...prev, {...prodotto, quantity: 1}])

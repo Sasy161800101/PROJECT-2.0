@@ -32,7 +32,6 @@ function Products(){
 
   return (
     <>
-      
       <Filtro
         categoriaSelezionata={categoriaSelezionata}
         setCategoriaSelezionata={setCategoriaSelezionata}
