@@ -24,15 +24,6 @@ function Prodotto () {
         }
     }
     return(<>
-    {/* <div>
-    <h2>{prodotto.title}</h2>
-    <p>{prodotto.description}</p>
-    <img src={prodotto.image}></img>
-    <button onClick={addToCart}
-    className="block w-full rounded-sm bg-teal-600 p-4 text-white font-medium transition hover:scale-105">
-        Aggiungi al carrello
-    </button>
-    </div> */}
     <div className="max-w-4xl mx-auto bg-white  rounded-2xl overflow-hidden flex flex-col sm:flex-row items-start gap-8 p-6 sm:p-10">
 
   {/* Immagine prodotto */}
@@ -57,14 +48,14 @@ function Prodotto () {
       <div className="py-3 grid grid-cols-3 gap-2 sm:gap-4">
         <dt className="font-medium text-gray-900">Prezzo</dt>
         <dd className="col-span-2 text-gray-700 font-semibold text-lg">
-          {prodotto.price ? `€${prodotto.price}` : "€1,000,000+"}
+          `€${prodotto.price}`
         </dd>
       </div>
 
       <div className="py-3 grid grid-cols-3 gap-2 sm:gap-4">
         <dt className="font-medium text-gray-900">Descrizione</dt>
         <dd className="col-span-2 text-gray-700 leading-relaxed">
-          {prodotto.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim fermentum ipsum."}
+          {prodotto.description}
         </dd>
       </div>
     </dl>
