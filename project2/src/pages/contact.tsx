@@ -33,7 +33,7 @@ function AboutContatti() {
       <section className="rounded-lg bg-teal-50 p-10 shadow-lg space-y-6">
         <h1 className="text-4xl font-bold text-teal-900 text-center">Chi siamo</h1>
         <p className="text-lg leading-relaxed max-w-3xl mx-auto text-teal-700">
-          Benvenuti su CalcioMaglie, il tuo negozio online di maglie da calcio ufficiali.
+          Benvenuti su SHope, il tuo negozio online di maglie da calcio ufficiali.
           La nostra passione per il calcio ci guida nella selezione delle migliori maglie, pensate per veri tifosi che vogliono indossare la propria squadra del cuore con orgoglio.
           Da anni offriamo prodotti di qualità, un servizio affidabile e un’esperienza di acquisto semplice e sicura.
         </p>
