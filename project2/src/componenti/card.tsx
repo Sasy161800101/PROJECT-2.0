@@ -39,7 +39,7 @@ function Card({ id, nomeProdotto, prezzoProdotto, imgProdotto }: CardProp) {
           className="w-full h-48 object-contain transition duration-500 group-hover:scale-105"
         />
         <h3 className="mt-4 text-lg font-medium text-gray-900 line-clamp-2 px-4">{nomeProdotto}</h3>
-        <p className="mt-1.5 text-sm text-gray-700 px-4">{prezzoProdotto} €</p>
+        <p className="mt-1.5 text-sm text-gray-700 px-4">{prezzoProdotto.toFixed(2)} €</p>
       </Link>
 
       <div onClick={(e) => e.stopPropagation()} className="px-6">
@@ -48,7 +48,7 @@ function Card({ id, nomeProdotto, prezzoProdotto, imgProdotto }: CardProp) {
             <select
               name={`Headline-${id}`}
               id={`Headline-${id}`}
-              className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+              className="cursor-pointer mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
             >
               <option value="">Seleziona la taglia</option>
                 <option value="XXS">XXS</option>
@@ -63,7 +63,7 @@ function Card({ id, nomeProdotto, prezzoProdotto, imgProdotto }: CardProp) {
 
           <button
             type="button"
-            className="self-end rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-teal-500"
+            className="cursor-pointer self-end rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition-transform hover:bg-teal-700"
           >
             <i className="fa fa-shopping-cart" style={{ fontSize: "18px" }}></i>
           </button>

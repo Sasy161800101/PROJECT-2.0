@@ -2,6 +2,7 @@ import { useState } from "react"
 import Card from "../componenti/card"
 import Filtro from "../componenti/filtro"
 import prodottiJSON from "../prodotti.json"
+import { useSearchParams } from "react-router-dom"
 
 type Prodotto = {
   id: number
@@ -20,6 +21,9 @@ function Products(){
   //STATO DEI FILTRI
   const [categoriaSelezionata, setCategoriaSelezionata] = useState<string>("all")
   const [nazioneSelezionata, setNazioneSelezionata] = useState<string>("all")
+  const [searchParams] = useSearchParams()
+  const nome = searchParams.get("nome")?.toLowerCase() || ""
+
 
   // SQUADRA E NAZIONE
   const categorie = Array.from(new Set(prodotti.map(prod => prod.category)))
@@ -27,9 +31,9 @@ function Products(){
   const prodottiFiltrati = prodotti.filter(prod => {
     const matchCategoria = categoriaSelezionata === "all" || prod.category === categoriaSelezionata
     const matchNazione = nazioneSelezionata === "all" || prod.nazione === nazioneSelezionata
-    return matchCategoria && matchNazione
+    const matchNome = nome === "" || prod.title.toLowerCase().includes(nome)
+    return matchCategoria && matchNazione && matchNome
   })
-
   return (
     <>
       <Filtro

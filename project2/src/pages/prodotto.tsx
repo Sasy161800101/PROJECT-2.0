@@ -46,7 +46,7 @@ function Prodotto () {
       <div className="py-3 grid grid-cols-3 gap-2 sm:gap-4">
         <dt className="font-medium text-gray-900">Prezzo</dt>
         <dd className="col-span-2 text-gray-700 font-semibold text-lg">
-          €${prodotto.price}
+          € {prodotto.price.toFixed(2)}
         </dd>
       </div>
 
@@ -59,13 +59,13 @@ function Prodotto () {
     </dl>
 
     <div className="mt-6 flex flex-wrap gap-4">
-      <button onClick={addToCart} className="bg-teal-600 text-white px-5 py-2 rounded-lg shadow-md transition-colors">
+      <button onClick={addToCart} className="cursor-pointer transition-transform hover:bg-teal-700  bg-teal-600 text-white px-5 py-2 rounded-lg shadow-md transition-colors">
         Aggiungi al carrello
       </button>
     <div>
     <label htmlFor="Quantity" className="sr-only"> Quantity </label>
     <div className="flex items-center gap-1">
-      <button type="button" className="size-10 leading-10 text-gray-600 transition hover:opacity-75">
+      <button type="button" className="cursor-pointer size-10 leading-10 text-gray-600 transition hover:opacity-75">
         -
       </button>
       <input
@@ -74,13 +74,13 @@ function Prodotto () {
         value="1"
         className="h-10 w-16 rounded-sm border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
       />
-      <button onClick={addToCart} type="button" className="size-10 leading-10 text-gray-600 transition hover:opacity-75">
+      <button onClick={addToCart} type="button" className="cursor-pointer size-10 leading-10 text-gray-600 transition hover:opacity-75">
         +
       </button>
       <select
               name={`Headline-${id}`}
               id={`Headline-${id}`}
-              className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+              className="cursor-pointer mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
             >
               <option value="">Seleziona la taglia</option>
                 <option value="XXS">XXS</option>

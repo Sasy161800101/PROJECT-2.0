@@ -91,7 +91,7 @@ function AboutContatti() {
         <div className="flex items-center gap-4 text-gray-700 text-lg">
           <span role="img" aria-label="email" className="text-teal-600 text-2xl">✉️</span>
           <a href="mailto:info@calciomaglie.com" className="hover:underline">
-            info@calciomaglie.com
+            info@shope.com
           </a>
         </div>
         <div className="flex items-center gap-4 text-gray-700 text-lg">
