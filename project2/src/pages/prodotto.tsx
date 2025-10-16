@@ -46,7 +46,7 @@ function Prodotto () {
       <div className="py-3 grid grid-cols-3 gap-2 sm:gap-4">
         <dt className="font-medium text-gray-900">Prezzo</dt>
         <dd className="col-span-2 text-gray-700 font-semibold text-lg">
-          `€${prodotto.price}`
+          €${prodotto.price}
         </dd>
       </div>
 
