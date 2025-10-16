@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Prodotto from "./prodotto"
 
 function Cart() {
   const [carrello, setCarrello] = useState(JSON.parse(localStorage.getItem("cart")) || [])
@@ -84,22 +85,12 @@ function Cart() {
             <dl className="space-y-0.5 text-sm text-gray-700">
               <div className="flex justify-between">
                 <dt>Totale</dt>
-                <dd>£250</dd>
-              </div>
-
-              <div className="flex justify-between">
-                <dt>Tasse</dt>
-                <dd>£25</dd>
-              </div>
-
-              <div className="flex justify-between">
-                <dt>Sconto</dt>
-                <dd>-£20</dd>
+                <dd>10</dd>
               </div>
 
               <div className="flex justify-between !text-base font-medium">
                 <dt>Totale</dt>
-                <dd>£200</dd>
+                <dd>{carrello.reduce((acc, cur)=> acc.price + cur.price, 10)}</dd>
               </div>
             </dl>
 

@@ -1,11 +1,14 @@
 import { Link, NavLink } from "react-router-dom"
 import CartIcon from "./cartIcon"
+import { useAuth } from "../context/authProvider"
 
 function Navbar() {
+  const {currentUser, logoutUtente} = useAuth()
     return(<>
     <header className="bg-white dark:bg-gray-900">
   <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
     <div className="flex h-16 items-center justify-between">
+
       <div className="md:flex md:items-center md:gap-12">
         <NavLink className="block text-teal-600 dark:text-teal-600" to="/">
           <span className="sr-only">Home</span>
@@ -35,21 +38,32 @@ function Navbar() {
       <div className="flex items-center gap-4">
         <CartIcon></CartIcon>
         <div className="sm:flex sm:gap-4">
+          {!currentUser && (
+            <>
           <Link
             className="transition-transform hover:bg-teal-700 rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm dark:hover:bg-teal-500"
             to="/login"
           >
             Login
           </Link>
-
-          <div className="hidden sm:flex">
             <Link
               className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
               to="/registrazione"
             >
               Registrati
             </Link>
-          </div>
+            </>
+            )}
+            {currentUser && (
+                <>
+            <button
+              className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
+              onClick={logoutUtente}
+            >
+              Logout
+            </button>
+          </>
+            )}
         </div>
       </div>
     </div>
