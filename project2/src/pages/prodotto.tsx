@@ -1,6 +1,8 @@
 import { Navigate, useParams } from "react-router-dom"
 import prodottiJSON from "../prodotti.json"
 import { useEffect, useState } from "react"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 function Prodotto () {
     const [carrello, setCarrello] = useState(JSON.parse(localStorage.getItem("cart")) || [])
@@ -22,6 +24,7 @@ function Prodotto () {
         } else {
             setCarrello((prev) => [...prev, {...prodotto, quantity: 1}])
         }
+        toast.success(`${prodotto.title} aggiunto al carrello!`)
     }
     return(<>
     <div className="max-w-4xl mx-auto bg-white  rounded-2xl overflow-hidden flex flex-col sm:flex-row items-start gap-8 p-6 sm:p-10">

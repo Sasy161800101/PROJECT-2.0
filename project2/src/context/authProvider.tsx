@@ -15,6 +15,7 @@ export function AuthProvider({children}){
         }else{
             setUsers(prev => [...prev, user] )
             toast.success("registrazione avvenuta con successo")
+            setTimeout(() => { navigate("/login") }, 3000)
         }
 
     }
