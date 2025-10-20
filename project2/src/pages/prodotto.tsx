@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css"
 function Prodotto () {
     const [carrello, setCarrello] = useState(JSON.parse(localStorage.getItem("cart")) || [])
     const [taglia, setTaglia] = useState(null)
+    const [quantita, setQuantita] = useState(1)
     const { id } = useParams()
     const prodotto = prodottiJSON.find((x)=> x.id == id) //(x.id === parseInt(id))
     useEffect(()=> {
@@ -22,7 +23,7 @@ function Prodotto () {
       }
         const productExist = carrello.find((x)=>x.id === prodotto.id && x.taglia === taglia)
         if (productExist) {
-            productExist.quantity ++
+            productExist.quantity += quantita
             setCarrello((prev)=> [...prev])
         } else {
             setCarrello((prev) => [...prev, {...prodotto, quantity: 1, taglia: taglia}])
@@ -33,6 +34,14 @@ function Prodotto () {
       const tagliaSelezionata = e.target.value
       setTaglia(tagliaSelezionata)
     }
+
+    function handleIncrement() {
+    setQuantita(prev => prev + 1)
+}
+
+function handleDecrement() {
+  setQuantita(prev => (prev > 1 ? prev - 1 : 1))
+}
     return(<>
     <div className="max-w-4xl mx-auto bg-white  rounded-2xl overflow-hidden flex flex-col sm:flex-row items-start gap-8 p-6 sm:p-10">
 
@@ -75,16 +84,16 @@ function Prodotto () {
     <div>
     <label htmlFor="Quantity" className="sr-only"> Quantity </label>
     <div className="flex items-center gap-1">
-      <button type="button" className="cursor-pointer size-10 leading-10 text-gray-600 transition hover:opacity-75">
+      <button onClick={handleDecrement}  type="button" className="cursor-pointer size-10 leading-10 text-gray-600 transition hover:opacity-75">
         -
       </button>
       <input
         type="number"
         id="Quantity"
-        value="1"
+        value={quantita}
         className="h-10 w-16 rounded-sm border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
       />
-      <button onClick={addToCart} type="button" className="cursor-pointer size-10 leading-10 text-gray-600 transition hover:opacity-75">
+      <button onClick={handleIncrement} type="button" className="cursor-pointer size-10 leading-10 text-gray-600 transition hover:opacity-75">
         +
       </button>
       <select

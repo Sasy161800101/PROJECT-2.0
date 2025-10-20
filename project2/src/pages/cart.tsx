@@ -16,6 +16,7 @@ function Cart() {
       setSpedizione(0)
     }
   }, [carrello])
+
   function handleRemove(id) {
     const index = carrello.findIndex((x)=> x.id === id)
     if(index >= 0) {
@@ -24,6 +25,22 @@ function Cart() {
       setCarrello(copiaCarrello)
     }
   }
+
+  function handleIncrement(id, taglia) {
+  setCarrello(carrello.map(item =>
+    item.id === id && item.taglia === taglia
+      ? { ...item, quantity: item.quantity + 1 }
+      : item
+  ));
+}
+
+  function handleDecrement(id, taglia) {
+  setCarrello(carrello.map(item =>
+    item.id === id && item.taglia === taglia && item.quantity > 1
+      ? { ...item, quantity: item.quantity - 1 }
+      : item
+  ));
+}
   return(<>
   <section>
   <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -36,7 +53,7 @@ function Cart() {
         <ul className="space-y-4">
           {carrello.map((prodotto)=> (
             <li
-            key={prodotto.id}
+            key={`${prodotto.id}-${prodotto.taglia}`}
             className="flex items-center gap-4">
             <img
               src={prodotto.image}
@@ -64,7 +81,7 @@ function Cart() {
               <label htmlFor="Quantity" className="sr-only">Quantity</label>
 
               <div className="flex items-center rounded-sm border border-gray-200">
-                <button type="button" className="size-10 leading-10 text-gray-600 transition hover:opacity-75">
+                <button onClick={() => handleDecrement(prodotto.id, prodotto.taglia)} type="button" className="size-10 leading-10 text-gray-600 transition hover:opacity-75">
                 -
                 </button>
 
@@ -77,12 +94,12 @@ function Cart() {
                             [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                 />
 
-                <button type="button" className="size-10 leading-10 text-gray-600 transition hover:opacity-75">
+                <button onClick={() => handleIncrement(prodotto.id, prodotto.taglia)} type="button" className="size-10 leading-10 text-gray-600 transition hover:opacity-75">
                 +
                 </button>
               </div>
             </div>
-              <button onClick={()=>handleRemove(prodotto.id)} className="text-gray-600 transition hover:text-red-600">
+              <button onClick={() => handleRemove(prodotto.id)} className="text-gray-600 transition hover:text-red-600">
                 <span className="sr-only">Remove item</span>
 
                 <svg

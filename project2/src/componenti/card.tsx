@@ -22,10 +22,10 @@ function Card({ id, nomeProdotto, prezzoProdotto, imgProdotto }: CardProp) {
               localStorage.setItem("cart", JSON.stringify(carrello))
           }, [carrello])
   function addToCart() {
-          if(!taglia) {
-              toast.info("Seleziona una taglia!")
-              return
-            }
+      if(!taglia) {
+          toast.info("Seleziona una taglia!")
+          return
+        }
           const productExist = carrello.find((x)=>x.id === prodotto.id && x.taglia === taglia)
           if (productExist) {
               productExist.quantity ++
