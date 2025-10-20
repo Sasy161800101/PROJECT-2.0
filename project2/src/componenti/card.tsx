@@ -1,4 +1,9 @@
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+import prodottiJSON from "../prodotti.json"
+
 
 type CardProp = {
   nomeProdotto: string
@@ -8,7 +13,32 @@ type CardProp = {
   id: number
 }
 
+
 function Card({ id, nomeProdotto, prezzoProdotto, imgProdotto }: CardProp) {
+      const [carrello, setCarrello] = useState(JSON.parse(localStorage.getItem("cart")) || [])
+      const [taglia, setTaglia] = useState(null)
+      const prodotto = prodottiJSON.find((x)=> x.id == id)
+       useEffect(()=> {
+              localStorage.setItem("cart", JSON.stringify(carrello))
+          }, [carrello])
+  function addToCart() {
+          if(!taglia) {
+              toast.info("Seleziona una taglia!")
+              return
+            }
+          const productExist = carrello.find((x)=>x.id === prodotto.id && x.taglia === taglia)
+          if (productExist) {
+              productExist.quantity ++
+              setCarrello((prev)=> [...prev])
+          } else {
+              setCarrello((prev) => [...prev, {...prodotto, quantity: 1, taglia: taglia}])
+          }
+          toast.success(`${prodotto.title} aggiunto al carrello!`)
+      }
+      function handleTaglia(e) {
+        const tagliaSelezionata = e.target.value
+        setTaglia(tagliaSelezionata)
+      }
   return (
     <div className="group relative block h-full p-3">
       <button
@@ -46,6 +76,7 @@ function Card({ id, nomeProdotto, prezzoProdotto, imgProdotto }: CardProp) {
         <form className="flex items-end gap-4">
           <div className="flex-1">
             <select
+            onChange={handleTaglia}
               name={`Headline-${id}`}
               id={`Headline-${id}`}
               className="cursor-pointer mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
@@ -62,6 +93,7 @@ function Card({ id, nomeProdotto, prezzoProdotto, imgProdotto }: CardProp) {
           </div>
 
           <button
+          onClick={addToCart}
             type="button"
             className="cursor-pointer self-end rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition-transform hover:bg-teal-700"
           >

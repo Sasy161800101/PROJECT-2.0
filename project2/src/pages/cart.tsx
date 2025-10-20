@@ -1,8 +1,29 @@
-import { useState } from "react"
-import Prodotto from "./prodotto"
+import { useEffect, useState } from "react"
 
 function Cart() {
   const [carrello, setCarrello] = useState(JSON.parse(localStorage.getItem("cart")) || [])
+  const [totale, setTotale] = useState(0)
+  const [spedizione, setSpedizione] = useState(0)
+  useEffect(()=> {
+    const t = carrello.reduce((acc, cur)=> acc + cur.price * cur.quantity, 0)
+    localStorage.setItem("cart", JSON.stringify(carrello))
+    setTotale(t)
+    if (t > 150) {
+      setSpedizione("GRATIS")
+    } else if (t > 0) {
+      setSpedizione(10)
+    } else {
+      setSpedizione(0)
+    }
+  }, [carrello])
+  function handleRemove(id) {
+    const index = carrello.findIndex((x)=> x.id === id)
+    if(index >= 0) {
+      const copiaCarrello = [...carrello] //metodo splice serve una copia dell'array perche non riesce a utilizzare metodi sull'array originale
+      copiaCarrello.splice(index, 1)
+      setCarrello(copiaCarrello)
+    }
+  }
   return(<>
   <section>
   <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -26,14 +47,14 @@ function Cart() {
             <div>
               <h3 className="text-sm text-gray-900">{prodotto.title}</h3>
 
-              <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
+              <dl className="mt-0.5 space-y-px text-[10px] text-start text-gray-600">
                 <div>
                   <dt className="inline font-bold">Prezzo: </dt>
                   <dd className="inline">{prodotto.price.toFixed(2)}</dd>
                 </div>
                 <div>
                   <dt className="inline font-bold">Size: </dt>
-                  <dd className="inline">XXS</dd>
+                  <dd className="inline">{prodotto.taglia}</dd>
                 </div>
               </dl>
             </div>
@@ -61,7 +82,7 @@ function Cart() {
                 </button>
               </div>
             </div>
-              <button className="text-gray-600 transition hover:text-red-600">
+              <button onClick={()=>handleRemove(prodotto.id)} className="text-gray-600 transition hover:text-red-600">
                 <span className="sr-only">Remove item</span>
 
                 <svg
@@ -89,19 +110,19 @@ function Cart() {
             <dl className="space-y-0.5 text-sm text-gray-700">
               <div className="flex justify-between">
                 <dt>Spedizione</dt>
-                <dd>10.00</dd>
+                <dd>{spedizione === "GRATIS" ? spedizione : `€ ${spedizione.toFixed(2)}`}</dd>
               </div>
               <div className="flex justify-between">
                 <dt>Articoli</dt>
                 <dd>
-                € {carrello.reduce((acc, cur) => acc + cur.price * cur.quantity, 0).toFixed(2)}
+                € {totale.toFixed(2)}
               </dd>
               </div>
 
               <div className="flex justify-between !text-base font-medium">
                 <dt>Totale</dt>
                 <dd>
-                € {carrello.reduce((acc, cur) => acc + cur.price * cur.quantity, 10).toFixed(2)}
+                {spedizione === "GRATIS" ? `€ ${totale.toFixed(2)}` : `€ ${(totale + spedizione).toFixed(2)}`}
               </dd>
               </div>
             </dl>

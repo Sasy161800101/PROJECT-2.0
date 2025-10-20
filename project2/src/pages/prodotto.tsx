@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css"
 
 function Prodotto () {
     const [carrello, setCarrello] = useState(JSON.parse(localStorage.getItem("cart")) || [])
+    const [taglia, setTaglia] = useState(null)
     const { id } = useParams()
     const prodotto = prodottiJSON.find((x)=> x.id == id) //(x.id === parseInt(id))
     useEffect(()=> {
@@ -15,16 +16,22 @@ function Prodotto () {
         return (<Navigate to={"/products"}></Navigate>)
     }
     function addToCart() {
-        const productExist = carrello.find((x)=> x.id === prodotto.id)
+      if(!taglia) {
+        toast.info("Seleziona una taglia!")
+        return
+      }
+        const productExist = carrello.find((x)=>x.id === prodotto.id && x.taglia === taglia)
         if (productExist) {
             productExist.quantity ++
-            // const nuovoProdotto = {...productExist, quantity: quantity}
             setCarrello((prev)=> [...prev])
-            // console.log(carrello)
         } else {
-            setCarrello((prev) => [...prev, {...prodotto, quantity: 1}])
+            setCarrello((prev) => [...prev, {...prodotto, quantity: 1, taglia: taglia}])
         }
         toast.success(`${prodotto.title} aggiunto al carrello!`)
+    }
+    function handleTaglia(e) {
+      const tagliaSelezionata = e.target.value
+      setTaglia(tagliaSelezionata)
     }
     return(<>
     <div className="max-w-4xl mx-auto bg-white  rounded-2xl overflow-hidden flex flex-col sm:flex-row items-start gap-8 p-6 sm:p-10">
@@ -81,6 +88,7 @@ function Prodotto () {
         +
       </button>
       <select
+              onChange={handleTaglia}
               name={`Headline-${id}`}
               id={`Headline-${id}`}
               className="cursor-pointer mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
