@@ -24,6 +24,7 @@ function Prodotto () {
         const productExist = carrello.find((x)=>x.id === prodotto.id && x.taglia === taglia)
         if (productExist) {
             productExist.quantity += quantita
+            console.log(quantita)
             setCarrello((prev)=> [...prev])
         } else {
             setCarrello((prev) => [...prev, {...prodotto, quantity: 1, taglia: taglia}])
