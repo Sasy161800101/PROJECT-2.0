@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "../index.css";
 import { useAuth } from "../context/authProvider";
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 const Checkout = () => {
   const [step, setStep] = useState(1);
@@ -21,9 +23,45 @@ const Checkout = () => {
     cartaCVV: "",
   });
 
+  function validazioneStep1() {
+  const requiredFields = ["nome", "cognome", "indirizzo", "citta", "provincia", "paese", "cap"];
+  for (let field of requiredFields) {
+    if (!formData[field]?.trim()) {
+      toast.error("Compila tutti i campi obbligatori dello Step 1");
+      return false;
+    }
+  }
+  return true;
+};
+
+function validazioneStep2() {
+  const { cartaNumero, cartaNome, cartaScadenza, cartaCVV } = formData;
+
+  if (!cartaNumero?.trim() || !/^\d{12,19}$/.test(cartaNumero.replace(/\s+/g, ""))) {
+    toast.error("Numero carta non valido (12-19 cifre)");
+    return false;
+  }
+  if (!cartaNome?.trim()) {
+    toast.error("Inserisci il nome sulla carta");
+    return false;
+  }
+  if (!cartaScadenza?.trim() || !/^\d{2}\/\d{2}$/.test(cartaScadenza)) {
+    toast.error("Formato scadenza non valido (MM/AA)");
+    return false;
+  }
+  if (!cartaCVV?.trim() || !/^\d{3,4}$/.test(cartaCVV)) {
+    toast.error("CVV non valido (3 o 4 cifre)");
+    return false;
+  }
+
+  return true;
+};
+
   const handleNext = () => {
-    if (step < 3) setStep(step + 1);
-  };
+  if (step === 1 && !validazioneStep1()) return;
+  if (step === 2 && !validazioneStep2()) return;
+  if (step < 3) setStep(step + 1);
+};
 
   const handleBack = () => {
     if (step > 1) setStep(step - 1);
@@ -123,15 +161,6 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
           </div>
 
           <div className="row">
-            <input
-              className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium !border-none"
-              type="text"
-              name="stato"
-              placeholder="Stato"
-              value={formData.stato}
-              onChange={handleChange}
-              required
-            />
             <input
               className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium !border-none"
               type="text"
@@ -269,13 +298,13 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
 
           <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
             <div>
-              <dt className="inline">Taglia:</dt>
-              <dd className="inline">{prodotto.taglia}</dd>
+              <dt className="inline">Taglia: </dt>
+              <dd className="inline font-bold">{prodotto.taglia}</dd>
             </div>
 
             <div>
-              <dt className="inline">Quantità:</dt>
-              <dd className="inline">{prodotto.quantity}</dd>
+              <dt className="inline">Quantità: </dt>
+              <dd className="inline font-bold">{prodotto.quantity}</dd>
             </div>
           </dl>
         </div>

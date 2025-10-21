@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-import Prodotto from "./prodotto"
+
 
 function Cart() {
   const [carrello, setCarrello] = useState(JSON.parse(localStorage.getItem("cart")) || [])
@@ -53,6 +53,8 @@ function handleCheckout() {
 
   if(!currentUser) {
     toast.info("Registrati o entra nel tuo account per comprare!")
+  } else if (carrello.length === 0){
+    toast.info("Riempi il carrello prima di procedere con il pagamento!")
   } else {
     const ordine = {id: Math.floor(Math.random() * 10000), stato:"in elaborazione", totale: totale, spedizione: spedizione, corriere: "", prodotti: carrello}
     localStorage.setItem("ordine", JSON.stringify(ordine))
