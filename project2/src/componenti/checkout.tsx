@@ -72,6 +72,7 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
         <div className="form">
           <div className="row">
             <input
+            className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium !border-none"
               type="text"
               name="nome"
               placeholder="Nome"
@@ -80,6 +81,7 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
               required
             />
             <input
+              className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium !border-none"
               type="text"
               name="cognome"
               placeholder="Cognome"
@@ -90,6 +92,7 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
           </div>
 
           <input
+            className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium !border-none"
             type="text"
             name="indirizzo"
             placeholder="Indirizzo"
@@ -100,6 +103,7 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
 
           <div className="row">
             <input
+              className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium !border-none"
               type="text"
               name="citta"
               placeholder="Città"
@@ -108,6 +112,7 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
               required
             />
             <input
+              className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium !border-none"
               type="text"
               name="provincia"
               placeholder="Provincia"
@@ -119,6 +124,7 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
 
           <div className="row">
             <input
+              className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium !border-none"
               type="text"
               name="stato"
               placeholder="Stato"
@@ -127,6 +133,7 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
               required
             />
             <input
+              className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium !border-none"
               type="text"
               name="paese"
               placeholder="Paese"
@@ -137,6 +144,7 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
           </div>
 
           <input
+            className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium !border-none"
             type="text"
             name="cap"
             placeholder="Codice Postale"
@@ -158,6 +166,7 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
       {step === 2 && (
         <div className="form">
           <input
+            className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium !border-none"
             type="text"
             name="cartaNumero"
             placeholder="Numero Carta"
@@ -166,6 +175,7 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
             required
           />
           <input
+            className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium !border-none"
             type="text"
             name="cartaNome"
             placeholder="Nome sul Carta"
@@ -175,6 +185,7 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
           />
           <div className="row">
             <input
+              className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium !border-none"
               type="text"
               name="cartaScadenza"
               placeholder="MM/AA"
@@ -183,6 +194,7 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
               required
             />
             <input
+              className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium !border-none"
               type="text"
               name="cartaCVV"
               placeholder="CVV"
@@ -193,7 +205,7 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
           </div>
 
           <div className="buttons-row">
-            <button className="back-btn" onClick={handleBack}>
+            <button className="flex-1 transition-transform hover:bg-gray-300 rounded-md bg-gray-200 text-sm font-bold cursor-pointer" onClick={handleBack}>
               Indietro
             </button>
             <button className="continue-btn" onClick={handleNext}>
@@ -221,7 +233,7 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
             {formData.cartaNumero.slice(-4)}
           </p>
           <div className="buttons-row">
-            <button className="back-btn" onClick={handleBack}>
+            <button className="flex-1 transition-transform hover:bg-gray-300 rounded-md bg-gray-200 text-sm font-bold cursor-pointer" onClick={handleBack}>
               Indietro
             </button>
             <button
@@ -236,7 +248,7 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
     </div>
     <div>
 <div
-  className="relative w-screen max-w-sm border border-gray-600 bg-gray-100 px-4 py-8 sm:px-6 lg:px-8"
+  className="relative w-screen max-w-sm border border-gray-300 rounded-md px-4 py-8 sm:px-6 lg:px-8"
   aria-modal="true"
   role="dialog"
   tabIndex="-1">
@@ -252,8 +264,8 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
           className="size-16 rounded-sm object-cover"
         />
 
-        <div>
-          <h3 className="text-sm text-gray-900">{prodotto.title}</h3>
+        <div className="text-left">
+          <h3 className="ftext-sm text-gray-900">{prodotto.title}</h3>
 
           <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
             <div>
