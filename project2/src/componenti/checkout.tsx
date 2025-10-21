@@ -90,8 +90,8 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
 }, [ordine])
 
   return (
-    <div className="flex justify-beetwen w-full">
-    <div className="checkout-container">
+    <div className="flex flex-col-reverse lg:flex-row justify-between w-full gap-6">
+    <div className="checkout-container flex-1">
         
       <div className="steps">
         {["Spedizione", "Pagamento", "Conferma"].map((label, index) => {
@@ -275,9 +275,10 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
         </div>
       )}
     </div>
-    <div>
+    
+    <div className="flex-1">
 <div
-  className="relative w-screen max-w-sm border border-gray-300 rounded-md px-4 py-8 sm:px-6 lg:px-8"
+  className="relative w-full border border-gray-300 rounded-md px-4 py-8 sm:px-6 lg:px-8"
   aria-modal="true"
   role="dialog"
   tabIndex="-1">
