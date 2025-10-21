@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 function Cart() {
   const [carrello, setCarrello] = useState(JSON.parse(localStorage.getItem("cart")) || [])
@@ -40,6 +42,16 @@ function Cart() {
       ? { ...item, quantity: item.quantity - 1 }
       : item
   ));
+}
+
+function handleCheckout() {
+  const currentUser = localStorage.getItem("currentUser")
+  if(!currentUser.nome) {
+    toast.info("Registrati o entra nel tuo account per comprare!")
+    return
+  } else {
+    console.log(currentUser)
+  }
 }
   return(<>
   <section>
@@ -145,12 +157,12 @@ function Cart() {
             </dl>
 
             <div className="flex justify-end">
-              <a
-                href="#"
-                className="block rounded-sm bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
+              <button
+              onClick={handleCheckout}
+              className="block cursor-pointer rounded-sm bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
               >
                 Checkout
-              </a>
+              </button>
             </div>
           </div>
         </div>

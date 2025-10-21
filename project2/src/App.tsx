@@ -37,8 +37,8 @@ function App() {
       <Route path='/prodotto/:id' element={<Prodotto></Prodotto>}></Route>
       <Route path='/checkout' element={<Private><Checkout></Checkout></Private>}></Route>
     </Routes>
-      <ToastContainer position="top-right" autoClose={2000} />
     <Footer></Footer>
+    <ToastContainer position="top-right" autoClose={2000} />
     </AuthProvider>
     </BrowserRouter> 
   )

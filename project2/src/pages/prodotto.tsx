@@ -26,7 +26,7 @@ function Prodotto () {
             productExist.quantity += quantita
             setCarrello((prev)=> [...prev])
         } else {
-            setCarrello((prev) => [...prev, {...prodotto, quantity: 1, taglia: taglia}])
+            setCarrello((prev) => [...prev, {...prodotto, quantity: quantita, taglia: taglia}])
         }
         toast.success(`${prodotto.title} aggiunto al carrello!`)
     }
