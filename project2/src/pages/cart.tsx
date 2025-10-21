@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import Prodotto from "./prodotto"
 
 function Cart() {
   const [carrello, setCarrello] = useState(JSON.parse(localStorage.getItem("cart")) || [])
   const [totale, setTotale] = useState(0)
   const [spedizione, setSpedizione] = useState(0)
+  const navigate = useNavigate()
   useEffect(()=> {
     const t = carrello.reduce((acc, cur)=> acc + cur.price * cur.quantity, 0)
     localStorage.setItem("cart", JSON.stringify(carrello))
@@ -43,14 +46,19 @@ function Cart() {
       : item
   ));
 }
+  
 
 function handleCheckout() {
-  const currentUser = localStorage.getItem("currentUser")
-  if(!currentUser.nome) {
+  const currentUser =JSON.parse(localStorage.getItem("currentUser"))
+
+  if(!currentUser) {
     toast.info("Registrati o entra nel tuo account per comprare!")
-    return
   } else {
-    console.log(currentUser)
+    const ordine = {id: Math.floor(Math.random() * 10000), stato:"in elaborazione", totale: totale, spedizione: spedizione, corriere: "", prodotti: carrello}
+    localStorage.setItem("ordine", JSON.stringify(ordine))
+    console.log("ordine salvato con successo")
+    navigate("/checkout")
+    
   }
 }
   return(<>

@@ -2,6 +2,7 @@ import { useState, type ChangeEvent, type FormEvent } from "react"
 import { useAuth } from "../context/authProvider"
 import { Link } from "react-router-dom"
 import "react-toastify/dist/ReactToastify.css"
+import { toast } from "react-toastify"
 
 
 function FormRegistrazione() {
@@ -128,8 +129,8 @@ function FormRegistrazione() {
              type="submit">Registrati</button>
              <p style={{
                 color: "#111827"
-             }}><a> Sei registrato?
-              <Link className="text-teal-600" to="/login">Accedi</Link> al tuo account!</a></p>
+             }}> Sei registrato?
+              <Link className="text-teal-600" to="/login">Accedi</Link> al tuo account!</p>
     </form>
     </div>
     </>)

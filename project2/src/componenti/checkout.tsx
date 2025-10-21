@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../index.css";
+import { useAuth } from "../context/authProvider";
 
 const Checkout = () => {
   const [step, setStep] = useState(1);
+  const [ordine, setOrdine] = useState(JSON.parse(localStorage.getItem("ordine")) || null)
+  const {currentUser, users} = useAuth()
   const [formData, setFormData] = useState({
     nome: "",
     cognome: "",
@@ -12,7 +15,6 @@ const Checkout = () => {
     stato: "",
     paese: "",
     cap: "",
-    spedizione: "free",
     cartaNumero: "",
     cartaNome: "",
     cartaScadenza: "",
@@ -31,9 +33,28 @@ const Checkout = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  function handlePaga(){
+    setOrdine( prev => ({...prev, ...formData}) )
+  }
+useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine)) 
+    const userAggiornato = {...currentUser , ordini: []}
+    userAggiornato.ordini.push(ordine)
+    localStorage.setItem("currentUser",JSON.stringify(userAggiornato) )
+    const userExist = users.find((user) => user.id == userAggiornato.id)
+    if(userExist){
+        const usersCopia = [...users]
+        const index = usersCopia.indexOf(userExist)
+        usersCopia.splice(index, 1, userAggiornato)
+        localStorage.setItem("users", JSON.stringify(usersCopia))
+        console.log("aggiornamento avvenuto con sucecsso")
+    }
+
+}, [ordine])
 
   return (
+    <div className="flex justify-beetwen w-full">
     <div className="checkout-container">
+        
       <div className="steps">
         {["Spedizione", "Pagamento", "Conferma"].map((label, index) => {
           const current = index + 1;
@@ -56,6 +77,7 @@ const Checkout = () => {
               placeholder="Nome"
               value={formData.nome}
               onChange={handleChange}
+              required
             />
             <input
               type="text"
@@ -63,6 +85,7 @@ const Checkout = () => {
               placeholder="Cognome"
               value={formData.cognome}
               onChange={handleChange}
+              required
             />
           </div>
 
@@ -72,6 +95,7 @@ const Checkout = () => {
             placeholder="Indirizzo"
             value={formData.indirizzo}
             onChange={handleChange}
+            required
           />
 
           <div className="row">
@@ -81,6 +105,7 @@ const Checkout = () => {
               placeholder="Città"
               value={formData.citta}
               onChange={handleChange}
+              required
             />
             <input
               type="text"
@@ -88,6 +113,7 @@ const Checkout = () => {
               placeholder="Provincia"
               value={formData.provincia}
               onChange={handleChange}
+              required
             />
           </div>
 
@@ -98,6 +124,7 @@ const Checkout = () => {
               placeholder="Stato"
               value={formData.stato}
               onChange={handleChange}
+              required
             />
             <input
               type="text"
@@ -105,6 +132,7 @@ const Checkout = () => {
               placeholder="Paese"
               value={formData.paese}
               onChange={handleChange}
+              required
             />
           </div>
 
@@ -114,35 +142,10 @@ const Checkout = () => {
             placeholder="Codice Postale"
             value={formData.cap}
             onChange={handleChange}
+            required
           />
 
-          <div className="shipping-methods">
-            {["free", "express", "1day"].map((method) => {
-              const labelText =
-                method === "free"
-                  ? "Spedizione gratuita"
-                  : method === "express"
-                  ? "Express"
-                  : "In un giorno";
-              return (
-                <label
-                  key={method}
-                  className={`shipping-label ${
-                    formData.spedizione === method ? "selected" : ""
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="spedizione"
-                    value={method}
-                    checked={formData.spedizione === method}
-                    onChange={handleChange}
-                  />
-                  {labelText}
-                </label>
-              );
-            })}
-          </div>
+        
 
           <div className="buttons-row">
             <button className="continue-btn" onClick={handleNext}>
@@ -160,6 +163,7 @@ const Checkout = () => {
             placeholder="Numero Carta"
             value={formData.cartaNumero}
             onChange={handleChange}
+            required
           />
           <input
             type="text"
@@ -167,6 +171,7 @@ const Checkout = () => {
             placeholder="Nome sul Carta"
             value={formData.cartaNome}
             onChange={handleChange}
+            required
           />
           <div className="row">
             <input
@@ -175,6 +180,7 @@ const Checkout = () => {
               placeholder="MM/AA"
               value={formData.cartaScadenza}
               onChange={handleChange}
+              required
             />
             <input
               type="text"
@@ -182,6 +188,7 @@ const Checkout = () => {
               placeholder="CVV"
               value={formData.cartaCVV}
               onChange={handleChange}
+              required
             />
           </div>
 
@@ -219,13 +226,55 @@ const Checkout = () => {
             </button>
             <button
               className="continue-btn"
-              onClick={() => alert("Ordine completato!")}
+              onClick={handlePaga}
             >
               Conferma Ordine
             </button>
           </div>
         </div>
       )}
+    </div>
+    <div>
+<div
+  className="relative w-screen max-w-sm border border-gray-600 bg-gray-100 px-4 py-8 sm:px-6 lg:px-8"
+  aria-modal="true"
+  role="dialog"
+  tabIndex="-1">
+
+
+  <div className="mt-4 space-y-6">
+    <ul className="space-y-4">
+        {ordine && ordine.prodotti.map((prodotto)=> (      
+        <li className="flex items-center gap-4">
+        <img
+          src= {prodotto.image}
+          alt={prodotto.title}
+          className="size-16 rounded-sm object-cover"
+        />
+
+        <div>
+          <h3 className="text-sm text-gray-900">{prodotto.title}</h3>
+
+          <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
+            <div>
+              <dt className="inline">Taglia:</dt>
+              <dd className="inline">{prodotto.taglia}</dd>
+            </div>
+
+            <div>
+              <dt className="inline">Quantità:</dt>
+              <dd className="inline">{prodotto.quantity}</dd>
+            </div>
+          </dl>
+        </div>
+      </li>
+    ))}
+
+    </ul>
+
+  </div>
+</div>
+    </div>
     </div>
   );
 };
