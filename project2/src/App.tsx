@@ -35,8 +35,8 @@ function App() {
       <Route path='/contact' element={<Contact></Contact>}></Route>
       <Route path='/prodotto/:id' element={<Prodotto></Prodotto>}></Route>
     </Routes>
-      <ToastContainer position="top-right" autoClose={2000} />
     <Footer></Footer>
+    <ToastContainer position="top-right" autoClose={2000} />
     </AuthProvider>
     </BrowserRouter> 
   )
