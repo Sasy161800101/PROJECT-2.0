@@ -1,31 +1,44 @@
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { useAuth } from "../context/authProvider" 
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/authProvider";
 
 function ConfermaOrdine() {
-  const navigate = useNavigate()
-  const { currentUser } = useAuth() 
-  const [ordine, setOrdine] = useState(null)
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
+  const [ordine, setOrdine] = useState(null);
 
   useEffect(() => {
-    const ordineSalvato = JSON.parse(localStorage.getItem("ordine"))
-    setOrdine(ordineSalvato)
+    const ordineSalvato = JSON.parse(localStorage.getItem("ordine"));
+    setOrdine(ordineSalvato);
+
+    const utenteLS = localStorage.getItem("currentUser");
+    if (utenteLS && ordineSalvato) {
+      const parsedUser = JSON.parse(utenteLS);
+
+      const ordiniAggiornati = [...(parsedUser.ordini || []), ordineSalvato];
+      const utenteAggiornato = {
+        ...parsedUser,
+        ordini: ordiniAggiornati,
+      };
+
+      localStorage.setItem("currentUser", JSON.stringify(utenteAggiornato));
+    }
 
     const timer = setTimeout(() => {
-      localStorage.removeItem("ordine")
-      localStorage.removeItem("cart")
-      navigate("/dashboard")
-    }, 8000)
+      localStorage.removeItem("ordine");
+      localStorage.removeItem("cart");
+      navigate("/dashboard");
+    }, 8000);
 
-    return () => clearTimeout(timer)
-  }, [])
+    return () => clearTimeout(timer);
+  }, []);
 
   if (!ordine) {
     return (
       <div className="text-center py-10">
         <h3 className="text-xl font-semibold">Caricamento ordine...</h3>
       </div>
-    )
+    );
   }
 
   return (
@@ -49,7 +62,11 @@ function ConfermaOrdine() {
           <ul className="space-y-3">
             {ordine.prodotti?.map((prodotto, idx) => (
               <li key={idx} className="flex items-center gap-4 border-b pb-2">
-                <img src={prodotto.image} alt={prodotto.title} className="w-12 h-12 object-cover rounded" />
+                <img
+                  src={prodotto.image}
+                  alt={prodotto.title}
+                  className="w-12 h-12 object-cover rounded"
+                />
                 <div>
                   <p className="font-semibold">{prodotto.title}</p>
                   <p className="text-sm text-gray-600">
@@ -66,7 +83,7 @@ function ConfermaOrdine() {
         Verrai reindirizzato alla tua dashboard tra pochi secondi...
       </p>
     </div>
-  )
+  );
 }
 
-export default ConfermaOrdine
+export default ConfermaOrdine;
