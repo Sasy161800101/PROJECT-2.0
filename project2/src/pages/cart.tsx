@@ -103,7 +103,7 @@ function handleCheckout() {
               <label htmlFor="Quantity" className="sr-only">Quantity</label>
 
               <div className="flex items-center rounded-sm border border-gray-200">
-                <button onClick={() => handleDecrement(prodotto.id, prodotto.taglia)} type="button" className="size-10 leading-10 text-gray-600 transition hover:opacity-75">
+                <button onClick={() => handleDecrement(prodotto.id, prodotto.taglia)} type="button" className="cursor-pointer size-10 leading-10 text-gray-600 transition hover:opacity-75">
                 -
                 </button>
 
@@ -116,12 +116,12 @@ function handleCheckout() {
                             [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                 />
 
-                <button onClick={() => handleIncrement(prodotto.id, prodotto.taglia)} type="button" className="size-10 leading-10 text-gray-600 transition hover:opacity-75">
+                <button onClick={() => handleIncrement(prodotto.id, prodotto.taglia)} type="button" className="cursor-pointer size-10 leading-10 text-gray-600 transition hover:opacity-75">
                 +
                 </button>
               </div>
             </div>
-              <button onClick={() => handleRemove(prodotto.id)} className="text-gray-600 transition hover:text-red-600">
+              <button onClick={() => handleRemove(prodotto.id)} className="cursor-pointer text-gray-600 transition hover:text-red-600">
                 <span className="sr-only">Remove item</span>
 
                 <svg
