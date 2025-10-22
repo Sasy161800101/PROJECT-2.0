@@ -16,6 +16,7 @@ import About from './pages/about'
 import Contact from './pages/contact'
 import Prodotto from './pages/prodotto'
 import Checkout from './componenti/checkout'
+import ConfermaOrdine from './pages/confermaOrdine'
 
 
 
@@ -36,6 +37,7 @@ function App() {
       <Route path='/contact' element={<Contact></Contact>}></Route>
       <Route path='/prodotto/:id' element={<Prodotto></Prodotto>}></Route>
       <Route path='/checkout' element={<Private><Checkout></Checkout></Private>}></Route>
+      <Route path='/confermaOrdine' element={<Private><ConfermaOrdine></ConfermaOrdine></Private>}></Route>
     </Routes>
     <Footer></Footer>
     <ToastContainer position="top-right" autoClose={2000} />

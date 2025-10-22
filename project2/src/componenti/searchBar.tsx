@@ -13,7 +13,7 @@ function SearchBar(){
     } 
     return(
         <>
-        <input className="w-50 p-2 text-center rounded border border-teal-300 focus:outline-none focus:border-teal-500"
+        <input className="w-full p-2 text-center rounded border border-teal-300 focus:outline-none focus:border-teal-500"
         type="text" placeholder="cerca prodotto" onChange={handleCerca} value={nome} />
         </>
     )

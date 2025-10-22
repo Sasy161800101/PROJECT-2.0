@@ -23,15 +23,15 @@ const Filtro = ({
   const [searchParams, setSearchParams] = useSearchParams()
   const nome = searchParams.get("nome") || ""
   return (
-    <div className="p-4 flex justify-center flex-col sm:flex-row sm:items-center gap-4">
+    <div className="w-full py-4 flex justify-center flex-col lg:flex-row lg:items-center gap-4">
       
-      <div>
-        <label htmlFor="categoria" className="mr-2 font-semibold">Filtra per squadra:</label>
+      <div className="w-full flex justify-between">
+        <label htmlFor="categoria" className="mr-2 text-start font-semibold w-full">Filtra per squadra:</label>
         <select
           id="categoria"
           value={categoriaSelezionata}
           onChange={(e) => setCategoriaSelezionata(e.target.value)}
-          className="cursor-pointer text-gray-700"
+          className="cursor-pointer text-gray-700 w-full"
         >
           <option value="all">Tutte le squadre</option>
           {categorie.map((cat) => (
@@ -40,13 +40,13 @@ const Filtro = ({
         </select>
       </div>
 
-      <div>
-        <label htmlFor="nazione" className="mr-2 font-semibold">Filtra per nazione:</label>
+      <div className="w-full flex justify-between">
+        <label htmlFor="nazione" className="mr-2 text-start font-semibold w-full">Filtra per nazione:</label>
         <select
           id="nazione"
           value={nazioneSelezionata}
           onChange={(e) => setNazioneSelezionata(e.target.value)}
-          className="text-gray-700 cursor-pointer"
+          className="text-gray-700 cursor-pointer w-full"
         >
           <option value="all">Tutte le nazioni</option>
           {nazioni.map((naz) => (
@@ -61,7 +61,7 @@ const Filtro = ({
           setNazioneSelezionata("all")
           setSearchParams("")
         }}
-        className="cursor-pointer transition-transform hover:bg-teal-700 ml-0 sm:ml-4 bg-teal-600 text-white px-5 py-2 rounded-md hover:bg-teal-700"
+        className="cursor-pointer transition-transform hover:bg-teal-700 ml-0 bg-teal-600 text-white px-5 py-2 rounded-md hover:bg-teal-700"
       >
         Reset
       </button>

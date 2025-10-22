@@ -56,7 +56,7 @@ function handleCheckout() {
   } else if (carrello.length === 0){
     toast.info("Riempi il carrello prima di procedere con il pagamento!")
   } else {
-    const ordine = {id: Math.floor(Math.random() * 10000), stato:"in elaborazione", totale: totale, spedizione: spedizione, corriere: "", prodotti: carrello}
+    const ordine = {id: Math.floor(Math.random() * 10000), stato:"in elaborazione", totale: totale, spedizione: spedizione, prodotti: carrello}
     localStorage.setItem("ordine", JSON.stringify(ordine))
     console.log("ordine salvato con successo")
     navigate("/checkout")

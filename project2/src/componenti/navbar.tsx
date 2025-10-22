@@ -94,7 +94,7 @@ function Navbar() {
       </div>
 
       {isOpen && (
-        <div className="lg:hidden px-4 pt-16 pb-4 space-y-2 bg-white dark:bg-gray-900">
+        <div className="absolute w-full shadow-sm z-4 lg:hidden px-4 pt-16 pb-4 space-y-2 bg-white dark:bg-gray-900">
           <NavLink className="block text-gray-500 hover:text-gray-700 dark:text-white" to="/">Home</NavLink>
           <NavLink className="block text-gray-500 hover:text-gray-700 dark:text-white" to="/products">Prodotti</NavLink>
           <NavLink className="block text-gray-500 hover:text-gray-700 dark:text-white" to="/about">Preferiti</NavLink>

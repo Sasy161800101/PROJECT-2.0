@@ -7,6 +7,7 @@ export function AuthProvider({children}){
     const [users, setUsers] = useState(JSON.parse(localStorage.getItem("users")) || [])
     const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("currentUser")) || null)
     const navigate = useNavigate()
+
         function registrazioneUtente(user){
         const userExist = users.find((x) => x.email === user.email)
         if(userExist){
@@ -19,6 +20,7 @@ export function AuthProvider({children}){
         }
 
     }
+
     function loginUtente({email, password}){
         const user = users.find((x) => x.email === email && x.password === password)
         if(user){
@@ -28,22 +30,32 @@ export function AuthProvider({children}){
         }else{
             toast.error("credenziali errate")
         }
-
     }
 
     function logoutUtente(){
         setCurrentUser(null)
         toast.info("logout effettuato")
         localStorage.removeItem("currentUser")
+    }
 
+    function aggiornaPassword(psw) {
+        setCurrentUser((prev)=> ({...prev, password: psw}))
     }
 
     useEffect(() => localStorage.setItem("users", JSON.stringify(users)), [users])
-    useEffect(() => localStorage.setItem("currentUser", JSON.stringify(currentUser)), [currentUser])
-
+    useEffect(() =>{
+        localStorage.setItem("currentUser", JSON.stringify(currentUser))
+        const userExist = users.find((x)=> x.id == currentUser.id)
+        if(userExist) {
+            const index = users.indexOf(userExist)
+            const copia = [...users]
+            copia.splice(index, 1, currentUser)
+            setUsers(copia)
+        }
+    }, [currentUser])
 
     return(
-       <AuthContext.Provider value={{registrazioneUtente, loginUtente, logoutUtente, currentUser, users}}>{children}</AuthContext.Provider>
+       <AuthContext.Provider value={{registrazioneUtente, loginUtente, logoutUtente, currentUser, users, aggiornaPassword}}>{children}</AuthContext.Provider>
     )
 
 

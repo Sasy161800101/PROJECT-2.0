@@ -3,18 +3,19 @@ import "../index.css";
 import { useAuth } from "../context/authProvider";
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const [step, setStep] = useState(1);
   const [ordine, setOrdine] = useState(JSON.parse(localStorage.getItem("ordine")) || null)
   const {currentUser, users} = useAuth()
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     nome: "",
     cognome: "",
     indirizzo: "",
     citta: "",
     provincia: "",
-    stato: "",
     paese: "",
     cap: "",
     cartaNumero: "",
@@ -71,9 +72,16 @@ function validazioneStep2() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+
   function handlePaga(){
-    setOrdine( prev => ({...prev, ...formData}) )
+    setOrdine( prev => ({...prev, ...formData}))
+    setTimeout(() => {
+      navigate("/confermaOrdine")
+    }, 2000);
   }
+
+
 useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine)) 
     const userAggiornato = {...currentUser , ordini: []}
     userAggiornato.ordini.push(ordine)
@@ -84,7 +92,6 @@ useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine))
         const index = usersCopia.indexOf(userExist)
         usersCopia.splice(index, 1, userAggiornato)
         localStorage.setItem("users", JSON.stringify(usersCopia))
-        console.log("aggiornamento avvenuto con sucecsso")
     }
 
 }, [ordine])
