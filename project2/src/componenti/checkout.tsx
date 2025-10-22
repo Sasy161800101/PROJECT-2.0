@@ -84,17 +84,6 @@ const Checkout = () => {
   }
 
 useEffect(() => {localStorage.setItem("ordine", JSON.stringify(ordine)) 
-    const userAggiornato = {...currentUser , ordini: []}
-    userAggiornato.ordini.push(ordine)
-    localStorage.setItem("currentUser",JSON.stringify(userAggiornato) )
-    const userExist = users.find((user) => user.id == userAggiornato.id)
-    if(userExist){
-        const usersCopia = [...users]
-        const index = usersCopia.indexOf(userExist)
-        usersCopia.splice(index, 1, userAggiornato)
-        localStorage.setItem("users", JSON.stringify(usersCopia))
-    }
-
 }, [ordine])
 
   return (

@@ -102,19 +102,19 @@ function Navbar() {
 
           {!currentUser ? (
             <>
-              <Link className="block bg-teal-600 text-white px-4 py-2 rounded text-center" to="/login">Login</Link>
-              <Link className="block bg-gray-100 text-teal-600 px-4 py-2 rounded text-center dark:bg-gray-800 dark:text-white" to="/registrazione">Registrati</Link>
+              <Link className="block  text-teal-600 px-4 rounded text-center" to="/login">Login</Link>
+              <Link className="block text-teal-600 px-4 rounded text-center dark:bg-gray-800 dark:text-white" to="/registrazione">Registrati</Link>
             </>
           ) : (
             <>
               <button
                 onClick={logoutUtente}
-                className="block bg-white text-teal-600 px-4 py-2 rounded text-center w-full cursor-pointer"
+                className="block bg-white text-teal-600 px-4 rounded text-center w-full cursor-pointer"
               >
                 Logout
               </button>
               <Link
-                className="block bg-white text-teal-600 px-4 py-2 rounded text-center"
+                className="block bg-white text-teal-600 px-4 rounded text-center"
                 to="/dashboard"
               >
                 Dashboard

@@ -9,26 +9,37 @@ function ConfermaOrdine() {
 
   useEffect(() => {
     const ordineSalvato = JSON.parse(localStorage.getItem("ordine"));
+    if (!ordineSalvato) return;
+
     setOrdine(ordineSalvato);
 
-    const utenteLS = localStorage.getItem("currentUser");
-    if (utenteLS && ordineSalvato) {
-      const parsedUser = JSON.parse(utenteLS);
+    const utenteLS = JSON.parse(localStorage.getItem("currentUser"));
+    if (utenteLS) {
+      const ordiniAggiornati = utenteLS.ordini?.some((o) => o.id === ordineSalvato.id)
+        ? utenteLS.ordini
+        : [...(utenteLS.ordini || []), ordineSalvato];
 
-      const ordiniAggiornati = [...(parsedUser.ordini || []), ordineSalvato];
-      const utenteAggiornato = {
-        ...parsedUser,
-        ordini: ordiniAggiornati,
-      };
+      const utenteAggiornato = { ...utenteLS, ordini: ordiniAggiornati };
 
       localStorage.setItem("currentUser", JSON.stringify(utenteAggiornato));
+
+      const usersLS = JSON.parse(localStorage.getItem("users")) || [];
+      const index = usersLS.findIndex((u) => u.id === utenteAggiornato.id);
+
+      if (index !== -1) {
+        usersLS[index] = utenteAggiornato;
+      } else {
+        usersLS.push(utenteAggiornato);
+      }
+
+      localStorage.setItem("users", JSON.stringify(usersLS));
     }
 
     const timer = setTimeout(() => {
       localStorage.removeItem("ordine");
       localStorage.removeItem("cart");
       navigate("/dashboard");
-    }, 8000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -53,9 +64,17 @@ function ConfermaOrdine() {
 
       <div className="bg-gray-100 rounded-lg p-6 text-left shadow-md">
         <h2 className="text-xl font-semibold mb-4">Riepilogo ordine</h2>
-        <p><strong>Nome:</strong> {ordine.nome} {ordine.cognome}</p>
-        <p><strong>Indirizzo:</strong> {ordine.indirizzo}, {ordine.cap}, {ordine.citta} ({ordine.provincia}), {ordine.paese}</p>
-        <p><strong>Pagamento:</strong> Carta **** {ordine.cartaNumero?.slice(-4)}</p>
+        <p>
+          <strong>Nome:</strong> {ordine.nome} {ordine.cognome}
+        </p>
+        <p>
+          <strong>Indirizzo:</strong> {ordine.indirizzo}, {ordine.cap},{" "}
+          {ordine.citta} ({ordine.provincia}), {ordine.paese}
+        </p>
+        <p>
+          <strong>Pagamento:</strong> Carta ****{" "}
+          {ordine.cartaNumero?.slice(-4)}
+        </p>
 
         <div className="mt-4">
           <h3 className="font-bold mb-2">Prodotti acquistati:</h3>

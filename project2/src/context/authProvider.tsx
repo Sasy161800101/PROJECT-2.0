@@ -8,34 +8,47 @@ export function AuthProvider({children}){
     const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("currentUser")) || null)
     const navigate = useNavigate()
 
-        function registrazioneUtente(user){
-        const userExist = users.find((x) => x.email === user.email)
-        if(userExist){
-            toast.error("utente già registrato")
-            setTimeout(() => {navigate("/login")}, 3000)
-        }else{
-            setUsers(prev => [...prev, user] )
-            toast.success("registrazione avvenuta con successo")
-            setTimeout(() => { navigate("/login") }, 3000)
-        }
+        function registrazioneUtente(user) {
+  const userExist = users.find((x) => x.email === user.email)
+  if (userExist) {
+    toast.error("Utente già registrato")
+    setTimeout(() => navigate("/login"), 3000)
+    return
+  }
 
-    }
 
-    function loginUtente({email, password}){
-        const user = users.find((x) => x.email === email && x.password === password)
-        if(user){
-            setCurrentUser(user)
-            toast.success("accesso effettuato")
-            setTimeout( ()=> {navigate("/dashboard")}, 3000)
-        }else{
-            toast.error("credenziali errate")
-        }
-    }
+  const nuovoUtente = {
+    ...user,
+    id: Date.now(),
+    ordini: [],
+  }
+
+  setUsers(prev => [...prev, nuovoUtente])
+  localStorage.setItem("users", JSON.stringify([...users, nuovoUtente]))
+
+  toast.success("Registrazione avvenuta con successo")
+  setTimeout(() => navigate("/login"), 3000)
+}
+
+    function loginUtente({ email, password }) {
+  const usersLS = JSON.parse(localStorage.getItem("users")) || []
+  const user = usersLS.find((x) => x.email === email && x.password === password)
+
+  if (user) {
+    setUsers(usersLS)
+    setCurrentUser(user)
+    localStorage.setItem("currentUser", JSON.stringify(user))
+    toast.success("Accesso effettuato")
+    setTimeout(() => { navigate("/dashboard") }, 3000)
+  } else {
+    toast.error("Credenziali errate")
+  }
+}
 
     function logoutUtente(){
+        localStorage.removeItem("currentUser")
         setCurrentUser(null)
         toast.info("logout effettuato")
-        localStorage.removeItem("currentUser")
     }
 
     function aggiornaPassword(psw) {
@@ -43,16 +56,22 @@ export function AuthProvider({children}){
     }
 
     useEffect(() => localStorage.setItem("users", JSON.stringify(users)), [users])
-    useEffect(() =>{
-        localStorage.setItem("currentUser", JSON.stringify(currentUser))
-        const userExist = users.find((x)=> x.id == currentUser.id)
-        if(userExist) {
-            const index = users.indexOf(userExist)
-            const copia = [...users]
-            copia.splice(index, 1, currentUser)
-            setUsers(copia)
-        }
-    }, [currentUser])
+    useEffect(() => {
+  if (!currentUser) {
+    localStorage.removeItem("currentUser")
+    return
+  }
+
+  localStorage.setItem("currentUser", JSON.stringify(currentUser))
+
+  const userExist = users.find((x) => x.id === currentUser.id)
+  if (userExist) {
+    const index = users.indexOf(userExist)
+    const copia = [...users]
+    copia.splice(index, 1, currentUser)
+    setUsers(copia)
+  }
+}, [currentUser])
 
     return(
        <AuthContext.Provider value={{registrazioneUtente, loginUtente, logoutUtente, currentUser, users, aggiornaPassword}}>{children}</AuthContext.Provider>
