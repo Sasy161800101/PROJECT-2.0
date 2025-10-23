@@ -65,12 +65,9 @@ function Navbar() {
           </div>
 
           <div className="lg:hidden absolute right-12 top-4">
-            <Link
-              to="/cart"
-              className="block text-teal-600 px-4 py-2 rounded text-center   hover:text-white transition"
-            >
+
               <CartIcon></CartIcon>
-            </Link>
+
           </div>
 
           <div className="lg:hidden absolute right-0 top-4">

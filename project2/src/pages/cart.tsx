@@ -58,7 +58,6 @@ function handleCheckout() {
   } else {
     const ordine = {id: Math.floor(Math.random() * 10000), stato:"in elaborazione", totale: totale, spedizione: spedizione, prodotti: carrello}
     localStorage.setItem("ordine", JSON.stringify(ordine))
-    console.log("ordine salvato con successo")
     navigate("/checkout")
     
   }
