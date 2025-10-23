@@ -23,7 +23,7 @@ function Footer() {
       </li>
 
       <li>
-        <NavLink className="text-gray-700 transition hover:text-gray-700/75" to="/about"> Preferiti </NavLink>
+        <NavLink className="text-gray-700 transition hover:text-gray-700/75" to="/preferiti"> Preferiti </NavLink>
       </li>
 
       <li>

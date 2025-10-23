@@ -115,7 +115,7 @@ function Navbar() {
         >
           <NavLink className="block text-gray-500 hover:text-gray-700 dark:text-white" to="/" onClick={() => setIsOpen(false)}>Home</NavLink>
           <NavLink className="block text-gray-500 hover:text-gray-700 dark:text-white" to="/products" onClick={() => setIsOpen(false)}>Prodotti</NavLink>
-          <NavLink className="block text-gray-500 hover:text-gray-700 dark:text-white" to="/about" onClick={() => setIsOpen(false)}>Preferiti</NavLink>
+          <NavLink className="block text-gray-500 hover:text-gray-700 dark:text-white" to="/preferiti" onClick={() => setIsOpen(false)}>Preferiti</NavLink>
           <NavLink className="block text-gray-500 hover:text-gray-700 dark:text-white" to="/contact" onClick={() => setIsOpen(false)}>Contatti</NavLink>
 
           {!currentUser ? (
