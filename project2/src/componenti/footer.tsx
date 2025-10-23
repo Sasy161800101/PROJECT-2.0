@@ -31,10 +31,10 @@ function Footer() {
       </li>
     </ul>
 
-    <ul className="mt-12 flex justify-center gap-6 md:gap-8">
+   <ul className="mt-12 flex justify-center gap-6 md:gap-8">
       <li>
         <a
-          href="#"
+          href="https://www.facebook.com/?locale=it_IT"
           rel="noreferrer"
           target="_blank"
           className="text-gray-700 transition hover:text-gray-700/75"
@@ -52,7 +52,7 @@ function Footer() {
 
       <li>
         <a
-          href="#"
+          href="https://www.instagram.com/?hl=it"
           rel="noreferrer"
           target="_blank"
           className="text-gray-700 transition hover:text-gray-700/75"
@@ -70,7 +70,7 @@ function Footer() {
 
       <li>
         <a
-          href="#"
+          href="https://x.com/tuo-profilo"
           rel="noreferrer"
           target="_blank"
           className="text-gray-700 transition hover:text-gray-700/75"
@@ -86,7 +86,7 @@ function Footer() {
 
       <li>
         <a
-          href="#"
+          href="https://github.com"
           rel="noreferrer"
           target="_blank"
           className="text-gray-700 transition hover:text-gray-700/75"
@@ -104,7 +104,7 @@ function Footer() {
 
       <li>
         <a
-          href="#"
+          href="https://dribbble.com"
           rel="noreferrer"
           target="_blank"
           className="text-gray-700 transition hover:text-gray-700/75"
