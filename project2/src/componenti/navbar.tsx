@@ -10,7 +10,6 @@ function Navbar() {
   const menuRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-  // 🔹 Chiudi menu se clicchi fuori da menu e bottone hamburger
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -32,7 +31,6 @@ function Navbar() {
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between relative">
 
-          {/* LOGO */}
           <div className="flex-shrink-0">
             <NavLink className="block text-teal-600 dark:text-teal-600" to="/">
               <span className="sr-only">Home</span>
@@ -43,7 +41,6 @@ function Navbar() {
             </NavLink>
           </div>
 
-          {/* NAV LINKS DESKTOP */}
           <nav className="hidden lg:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
             <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white" to="/">Home</NavLink>
             <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white" to="/products">Prodotti</NavLink>
@@ -51,7 +48,6 @@ function Navbar() {
             <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white" to="/contact">Contatti</NavLink>
           </nav>
 
-          {/* AZIONI DESKTOP */}
           <div className="hidden lg:flex items-center gap-4">
             <CartIcon />
             {!currentUser ? (
@@ -87,15 +83,13 @@ function Navbar() {
             )}
           </div>
 
-          {/* ICONA CARRELLO MOBILE */}
           <div className="lg:hidden absolute right-12 top-4">
             <CartIcon />
           </div>
 
-          {/* BOTTONE HAMBURGER MOBILE */}
           <div className="lg:hidden absolute right-0 top-4">
             <button
-              ref={buttonRef} // ✅ riferimento per evitare chiusura immediata
+              ref={buttonRef} 
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center h-10 w-10 rounded-md p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
             >
@@ -114,7 +108,6 @@ function Navbar() {
         </div>
       </div>
 
-      {/* MENU MOBILE */}
       {isOpen && (
         <div
           ref={menuRef}
