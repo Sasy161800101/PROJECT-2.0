@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import CartIcon from "./cartIcon";
 import { useAuth } from "../context/authProvider";
@@ -7,11 +7,32 @@ function Navbar() {
   const { currentUser, logoutUtente } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+
+  // 🔹 Chiudi menu se clicchi fuori da menu e bottone hamburger
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
     <header className="bg-white dark:bg-gray-900 relative">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between relative">
 
+          {/* LOGO */}
           <div className="flex-shrink-0">
             <NavLink className="block text-teal-600 dark:text-teal-600" to="/">
               <span className="sr-only">Home</span>
@@ -22,25 +43,27 @@ function Navbar() {
             </NavLink>
           </div>
 
+          {/* NAV LINKS DESKTOP */}
           <nav className="hidden lg:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
-            <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/">Home</NavLink>
-            <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/products">Prodotti</NavLink>
-            <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/about">Preferiti</NavLink>
-            <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/contact">Contatti</NavLink>
+            <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white" to="/">Home</NavLink>
+            <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white" to="/products">Prodotti</NavLink>
+            <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white" to="/about">Preferiti</NavLink>
+            <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white" to="/contact">Contatti</NavLink>
           </nav>
 
+          {/* AZIONI DESKTOP */}
           <div className="hidden lg:flex items-center gap-4">
             <CartIcon />
             {!currentUser ? (
               <>
                 <Link
-                  className="transition-transform hover:bg-teal-700 rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm dark:hover:bg-teal-500"
+                  className="transition-transform hover:bg-teal-700 rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm"
                   to="/login"
                 >
                   Login
                 </Link>
                 <Link
-                  className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
+                  className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600"
                   to="/registrazione"
                 >
                   Registrati
@@ -49,13 +72,13 @@ function Navbar() {
             ) : (
               <>
                 <button
-                  className="cursor-pointer transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
+                  className="cursor-pointer transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600"
                   onClick={logoutUtente}
                 >
                   Logout
                 </button>
                 <Link
-                  className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
+                  className="transition-transform hover:bg-gray-300 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600"
                   to="/dashboard"
                 >
                   Dashboard
@@ -64,14 +87,15 @@ function Navbar() {
             )}
           </div>
 
+          {/* ICONA CARRELLO MOBILE */}
           <div className="lg:hidden absolute right-12 top-4">
-
-              <CartIcon></CartIcon>
-
+            <CartIcon />
           </div>
 
+          {/* BOTTONE HAMBURGER MOBILE */}
           <div className="lg:hidden absolute right-0 top-4">
             <button
+              ref={buttonRef} // ✅ riferimento per evitare chiusura immediata
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center h-10 w-10 rounded-md p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
             >
@@ -90,22 +114,29 @@ function Navbar() {
         </div>
       </div>
 
+      {/* MENU MOBILE */}
       {isOpen && (
-        <div className="absolute w-full shadow-sm z-4 lg:hidden px-4 pt-16 pb-4 space-y-2 bg-white dark:bg-gray-900">
-          <NavLink className="block text-gray-500 hover:text-gray-700 dark:text-white" to="/">Home</NavLink>
-          <NavLink className="block text-gray-500 hover:text-gray-700 dark:text-white" to="/products">Prodotti</NavLink>
-          <NavLink className="block text-gray-500 hover:text-gray-700 dark:text-white" to="/about">Preferiti</NavLink>
-          <NavLink className="block text-gray-500 hover:text-gray-700 dark:text-white" to="/contact">Contatti</NavLink>
+        <div
+          ref={menuRef}
+          className="absolute w-full shadow-sm z-40 lg:hidden px-4 pt-16 pb-4 space-y-2 bg-white dark:bg-gray-900"
+        >
+          <NavLink className="block text-gray-500 hover:text-gray-700 dark:text-white" to="/" onClick={() => setIsOpen(false)}>Home</NavLink>
+          <NavLink className="block text-gray-500 hover:text-gray-700 dark:text-white" to="/products" onClick={() => setIsOpen(false)}>Prodotti</NavLink>
+          <NavLink className="block text-gray-500 hover:text-gray-700 dark:text-white" to="/about" onClick={() => setIsOpen(false)}>Preferiti</NavLink>
+          <NavLink className="block text-gray-500 hover:text-gray-700 dark:text-white" to="/contact" onClick={() => setIsOpen(false)}>Contatti</NavLink>
 
           {!currentUser ? (
             <>
-              <Link className="block  text-teal-600 px-4 rounded text-center" to="/login">Login</Link>
-              <Link className="block text-teal-600 px-4 rounded text-center dark:bg-gray-800 dark:text-white" to="/registrazione">Registrati</Link>
+              <Link className="block text-teal-600 px-4 rounded text-center" to="/login" onClick={() => setIsOpen(false)}>Login</Link>
+              <Link className="block text-teal-600 px-4 rounded text-center" to="/registrazione" onClick={() => setIsOpen(false)}>Registrati</Link>
             </>
           ) : (
             <>
               <button
-                onClick={logoutUtente}
+                onClick={() => {
+                  logoutUtente();
+                  setIsOpen(false);
+                }}
                 className="block bg-white text-teal-600 px-4 rounded text-center w-full cursor-pointer"
               >
                 Logout
@@ -113,6 +144,7 @@ function Navbar() {
               <Link
                 className="block bg-white text-teal-600 px-4 rounded text-center"
                 to="/dashboard"
+                onClick={() => setIsOpen(false)}
               >
                 Dashboard
               </Link>
@@ -120,7 +152,6 @@ function Navbar() {
           )}
         </div>
       )}
-
     </header>
   );
 }

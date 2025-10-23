@@ -99,24 +99,37 @@ export function Dashboard() {
                       className="flex-col flex items-center bg-white p-4 rounded-lg shadow-sm w-full gap-3"
                     >
                       <div className="flex items-center bg-white w-full">
-                        <img
-                          src={ordine.prodotti[0].image}
-                          alt={ordine.nome}
-                          className="w-16 h-16 object-cover rounded-md mr-5"
-                        />
-                        <div className="flex-1">
-                          <div className="text-lg font-medium text-gray-900">{ordine.nome}</div>
-                          <div className="text-gray-500">Numero d'ordine: {ordine.id}</div>
-                          <div className={statoClass(ordine.stato)}>Stato: {ordine.stato}</div>
-                        </div>
-                        <div className="font-semibold text-teal-700 text-lg">{ordine.totale.toFixed(2)} €</div>
-                        <button
-                          className="text-teal-600 cursor-pointer px-6"
-                          onClick={() => setDettagli((prev) => !prev)}
-                        >
-                          Dettagli
-                        </button>
-                      </div>
+  <img
+    src={ordine.prodotti[0].image}
+    alt={ordine.nome}
+    className="w-16 h-16 object-cover rounded-md mr-5"
+  />
+
+  <div className="flex-1">
+    <div className="text-lg font-medium text-gray-900 hidden md:block">
+      {ordine.nome}
+    </div>
+
+    <div className="text-gray-500">
+      Numero d'ordine: {ordine.id}
+    </div>
+
+    <div className={`${statoClass(ordine.stato)} hidden md:block`}>
+      Stato: {ordine.stato}
+    </div>
+  </div>
+
+  <div className="font-semibold text-teal-700 text-lg hidden md:block">
+    {ordine.totale.toFixed(2)} €
+  </div>
+
+  <button
+    className="text-teal-600 cursor-pointer px-6"
+    onClick={() => setDettagli((prev) => !prev)}
+  >
+    Dettagli
+  </button>
+</div>
                       {dettagli && (
                         <div className="flex flex-col justify-between w-full">
                           <hr className="text-gray-300 py-2" />

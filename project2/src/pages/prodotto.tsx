@@ -49,7 +49,7 @@ function handleDecrement() {
     <img
       src={prodotto.image}
       alt={prodotto.title}
-      className="w-full h-64 sm:h-full object-cover rounded-xl"
+      className="w-4/5 h-48 mx-auto object-contain sm:w-full sm:h-full sm:object-cover rounded-xl"
     />
   </div>
 

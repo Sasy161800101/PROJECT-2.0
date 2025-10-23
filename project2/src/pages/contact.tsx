@@ -84,21 +84,23 @@ function AboutContatti() {
         </div>
       </section>
 
-      <section className="max-w-2xl mx-auto space-y-6">
-        <h2 className="text-3xl font-semibold text-center mb-6">Contattaci</h2>
-        <div className="flex items-center gap-4 text-gray-700 text-lg">
-          <span role="img" aria-label="email" className="text-teal-600 text-2xl">✉️</span>
-          <a href="mailto:info@calciomaglie.com" className="hover:underline">
-            info@shope.com
-          </a>
-        </div>
-        <div className="flex items-center gap-4 text-gray-700 text-lg">
-          <span role="img" aria-label="telefono" className="text-teal-600 text-2xl">📞</span>
-          <a href="tel:+390123456789" className="hover:underline">
-            +39 012 345 6789
-          </a>
-        </div>
-      </section>
+      <section className="max-w-2xl mx-auto space-y-6 text-center">
+  <h2 className="text-3xl font-semibold text-center mb-6">Contattaci</h2>
+
+  <div className="flex justify-center items-center gap-4 text-gray-700 text-lg">
+    <span role="img" aria-label="email" className="text-teal-600 text-2xl">✉️</span>
+    <a href="mailto:info@calciomaglie.com" className="hover:underline">
+      info@shope.com
+    </a>
+  </div>
+
+  <div className="flex justify-center items-center gap-4 text-gray-700 text-lg">
+    <span role="img" aria-label="telefono" className="text-teal-600 text-2xl">📞</span>
+    <a href="tel:+390123456789" className="hover:underline">
+      +39 012 345 6789
+    </a>
+  </div>
+</section>
 
       <section className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md mb-10">
         <h2 className="text-2xl font-semibold text-teal-900 mb-4 text-center">Iscriviti alla newsletter</h2>
