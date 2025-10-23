@@ -12,7 +12,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Private from './componenti/private'
 import Products from './pages/products'
-import About from './pages/about'
+import Preferiti from "./pages/preferiti";
 import Contact from './pages/contact'
 import Prodotto from './pages/prodotto'
 import Checkout from './componenti/checkout'
@@ -33,7 +33,7 @@ function App() {
       <Route path='/carrello' element={<Cart></Cart>}></Route>
       <Route path='*' element={<Navigate to={"/"}></Navigate>}></Route>
       <Route path='/products' element={<Products></Products>}></Route>
-      <Route path='/about' element={<About></About>}></Route>
+      <Route path="/preferiti" element={<Preferiti />} />
       <Route path='/contact' element={<Contact></Contact>}></Route>
       <Route path='/prodotto/:id' element={<Prodotto></Prodotto>}></Route>
       <Route path='/checkout' element={<Private><Checkout></Checkout></Private>}></Route>

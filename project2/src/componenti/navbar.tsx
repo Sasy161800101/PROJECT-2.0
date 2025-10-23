@@ -44,7 +44,7 @@ function Navbar() {
           <nav className="hidden lg:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
             <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white" to="/">Home</NavLink>
             <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white" to="/products">Prodotti</NavLink>
-            <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white" to="/about">Preferiti</NavLink>
+            <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white" to="/preferiti">Preferiti</NavLink>
             <NavLink className="text-gray-500 hover:text-gray-500/75 dark:text-white" to="/contact">Contatti</NavLink>
           </nav>
 

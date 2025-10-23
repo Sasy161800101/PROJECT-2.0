@@ -6,6 +6,37 @@ export const AuthContext = createContext()
 export function AuthProvider({children}){
     const [users, setUsers] = useState(JSON.parse(localStorage.getItem("users")) || [])
     const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("currentUser")) || null)
+
+    function togglePreferito(prodotto) {
+  if (!currentUser) {
+    toast.info("Devi accedere per aggiungere ai preferiti!");
+    return;
+  }
+
+  const utenteAggiornato = { ...currentUser };
+  const preferiti = utenteAggiornato.preferiti || [];
+  const esiste = preferiti.find((p) => p.id === prodotto.id);
+
+  let nuoviPreferiti;
+  if (esiste) {
+    nuoviPreferiti = preferiti.filter((p) => p.id !== prodotto.id);
+    toast.info(`${prodotto.title} rimosso dai preferiti`);
+  } else {
+    nuoviPreferiti = [...preferiti, prodotto];
+    toast.success(`${prodotto.title} aggiunto ai preferiti`);
+  }
+
+  utenteAggiornato.preferiti = nuoviPreferiti;
+  setCurrentUser(utenteAggiornato);
+  localStorage.setItem("currentUser", JSON.stringify(utenteAggiornato));
+
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+  const index = users.findIndex((u) => u.id === utenteAggiornato.id);
+  if (index !== -1) users[index] = utenteAggiornato;
+  else users.push(utenteAggiornato);
+  localStorage.setItem("users", JSON.stringify(users));
+}
+
     const navigate = useNavigate()
 
         function registrazioneUtente(user) {
@@ -74,7 +105,7 @@ export function AuthProvider({children}){
 }, [currentUser])
 
     return(
-       <AuthContext.Provider value={{registrazioneUtente, loginUtente, logoutUtente, currentUser, users, aggiornaPassword}}>{children}</AuthContext.Provider>
+       <AuthContext.Provider value={{registrazioneUtente, loginUtente, logoutUtente, currentUser, users, aggiornaPassword, togglePreferito}}>{children}</AuthContext.Provider>
     )
 
 
