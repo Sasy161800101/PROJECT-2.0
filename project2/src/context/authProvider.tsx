@@ -72,7 +72,7 @@ export function AuthProvider({children}){
     toast.success("Accesso effettuato")
     setTimeout(() => { navigate("/dashboard") }, 3000)
   } else {
-    toast.error("Credenziali errate")
+    toast.error("Credenziali errate o utente non presente!")
   }
 }
 
