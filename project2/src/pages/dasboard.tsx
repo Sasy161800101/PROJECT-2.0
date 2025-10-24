@@ -17,7 +17,7 @@ export function Dashboard() {
   const [modifica, setModifica] = useState(false);
   const [passwordAttuale, setPasswordAttuale] = useState("");
   const [passwordNuova, setPasswordNuova] = useState("");
-  const [sezioneAttiva, setSezioneAttiva] = useState("");
+  const [sezioneAttiva, setSezioneAttiva] = useState("profilo");
   const [ordini, setOrdini] = useState([]);
 
   useEffect(() => {
@@ -97,29 +97,29 @@ export function Dashboard() {
           <h1 className="text-2xl font-semibold text-teal-700">Dashboard Utente</h1>
         </div>
 
-        <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(250px,1fr))]">
+        <div className="grid md:gap-5 gap-2 grid-cols-3 md:grid-cols-[repeat(auto-fit,minmax(250px,1fr))]">
           <div
             onClick={() => setSezioneAttiva(sezioneAttiva === "profilo" ? "" : "profilo")}
-            className="bg-gray-200 hover:bg-gray-300 p-6 rounded-xl shadow-md cursor-pointer transition-colors"
+            className={`${sezioneAttiva === "profilo" ? "bg-gray-300" : "bg-gray-200"} hover:bg-gray-300 p-2 md:p-6 rounded-xl shadow-md cursor-pointer transition-colors`}
           >
-            <h2 className="text-teal-700 text-lg font-semibold mb-2">Benvenuto!</h2>
-            <p className="text-gray-900">Visualizza i tuoi dati personali</p>
+            <h2 className="text-teal-700 text-md md:text-lg font-semibold md:mb-2">Benvenuto!</h2>
+            <p className="hidden md:block text-gray-900">Visualizza i tuoi dati personali</p>
           </div>
 
           <div
             onClick={() => setSezioneAttiva(sezioneAttiva === "ordini" ? "" : "ordini")}
-            className="bg-gray-200 hover:bg-gray-300 p-6 rounded-xl shadow-md cursor-pointer transition-colors"
+            className={`${sezioneAttiva === "ordini" ? "bg-gray-300" : "bg-gray-200"} hover:bg-gray-300 p-2 md:p-6 rounded-xl shadow-md cursor-pointer transition-colors`}
           >
-            <h2 className="text-teal-700 text-lg font-semibold mb-2">I miei ordini</h2>
-            <p className="text-gray-900">Controlla gli ordini che hai effettuato</p>
+            <h2 className="text-teal-700 text-md md:text-lg font-semibold md:mb-2">I miei ordini</h2>
+            <p className="hidden md:block text-gray-900">Controlla gli ordini che hai effettuato</p>
           </div>
 
           <div
             onClick={() => setSezioneAttiva(sezioneAttiva === "impostazioni" ? "" : "impostazioni")}
-            className="bg-gray-200 hover:bg-gray-300 p-6 rounded-xl shadow-md cursor-pointer transition-colors"
+            className={`${sezioneAttiva === "impostazioni" ? "bg-gray-300" : "bg-gray-200"} hover:bg-gray-300 p-2 md:p-6 rounded-xl shadow-md cursor-pointer transition-colors`}
           >
-            <h2 className="text-teal-700 text-lg font-semibold mb-2">Impostazioni</h2>
-            <p className="text-gray-900">Gestisci il tuo account</p>
+            <h2 className="text-teal-700 text-md md:text-lg font-semibold md:mb-2">Impostazioni</h2>
+            <p className="hidden md:block text-gray-900">Gestisci il tuo account</p>
           </div>
         </div>
 

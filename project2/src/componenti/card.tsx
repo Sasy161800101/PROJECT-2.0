@@ -87,7 +87,7 @@ function Card({ id, nomeProdotto, prezzoProdotto, imgProdotto }: CardProp) {
         </svg>
       </button>
 
-      <Link to={`/prodotto/${id}`} className="block">
+      <Link onClick={() =>window.scrollTo({ top: 0 })} to={`/prodotto/${id}`} className="block">
         <img
           src={imgProdotto}
           alt={nomeProdotto}
