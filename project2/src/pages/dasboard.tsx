@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/authProvider";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Accordion } from "../componenti/accordion";
+import { Section } from "../componenti/section";
+import { Prodotto } from "../componenti/prodotto";
 
 export function Dashboard() {
   const { currentUser: userFromContext } = useAuth();
@@ -16,7 +19,6 @@ export function Dashboard() {
   const [passwordNuova, setPasswordNuova] = useState("");
   const [sezioneAttiva, setSezioneAttiva] = useState("");
   const [ordini, setOrdini] = useState([]);
-  const [dettagli, setDettagli] = useState(false);
 
   useEffect(() => {
     if (currentUser && currentUser.ordini) {
@@ -143,62 +145,19 @@ export function Dashboard() {
                 <p>Non hai ancora effettuato ordini.</p>
               ) : (
                 <div className="flex flex-col gap-4">
-                  {ordini.map((ordine) => (
-                    <div
-                      key={ordine.id}
-                      className="flex-col flex items-center bg-white p-4 rounded-lg shadow-sm w-full gap-3"
-                    >
-                      <div className="flex items-center bg-white w-full">
-                        <img
-                          src={ordine.prodotti[0].image}
-                          alt={ordine.nome}
-                          className="w-16 h-16 object-cover rounded-md mr-5"
-                        />
+                  <Accordion>
 
-                        <div className="flex-1">
-                          <div className="text-lg font-medium text-gray-900 hidden md:block">
-                            {ordine.nome}
-                          </div>
+                    {ordini.map((ordine) => (
 
-                          <div className="text-gray-500">
-                            Numero d'ordine: {ordine.id}
-                          </div>
+                      <Section ordine={ordine}>
 
-                          <div className={`${statoClass(ordine.stato)} hidden md:block`}>
-                            Stato: {ordine.stato}
-                          </div>
-                        </div>
+                        <Prodotto prodotti={ordine.prodotti}></Prodotto>
 
-                        <div className="font-semibold text-teal-700 text-lg hidden md:block">
-                          {ordine.totale.toFixed(2)} €
-                        </div>
+                      </Section>
 
-                        <button
-                          className="text-teal-600 cursor-pointer px-6"
-                          onClick={() => setDettagli((prev) => !prev)}
-                        >
-                          Dettagli
-                        </button>
-                      </div>
-                      {dettagli && (
-                        <div className="flex flex-col justify-between w-full">
-                          <hr className="text-gray-300 py-2" />
-                          {ordine.prodotti.map((prodotto, index) => (
-                            <div key={index} className="flex justify-between w-full items-center pr-6">
-                              <img
-                                className="w-16 h-16 object-cover rounded-md mr-5"
-                                src={prodotto.image}
-                                alt={prodotto.title}
-                              />
-                              <p>{prodotto.title}</p>
-                              <p>Taglia: {prodotto.taglia}</p>
-                              <p>Prezzo: {prodotto.price.toFixed(2)} €</p>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                    ))}
+
+                  </Accordion>
                 </div>
               )}
             </div>

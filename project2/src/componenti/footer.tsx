@@ -15,19 +15,19 @@ function Footer() {
 
     <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
       <li>
-        <NavLink className="text-gray-700 transition hover:text-gray-700/75" to="/"> Home </NavLink>
+        <NavLink onClick={() => window.scrollTo({ top: 0 })} className="text-gray-700 transition hover:text-gray-700/75" to="/"> Home </NavLink>
       </li>
 
       <li>
-        <NavLink className="text-gray-700 transition hover:text-gray-700/75" to="/products"> Prodotti </NavLink>
+        <NavLink onClick={() => window.scrollTo({ top: 0 })} className="text-gray-700 transition hover:text-gray-700/75" to="/products"> Prodotti </NavLink>
       </li>
 
       <li>
-        <NavLink className="text-gray-700 transition hover:text-gray-700/75" to="/preferiti"> Preferiti </NavLink>
+        <NavLink onClick={() => window.scrollTo({ top: 0 })} className="text-gray-700 transition hover:text-gray-700/75" to="/preferiti"> Preferiti </NavLink>
       </li>
 
       <li>
-        <NavLink className="text-gray-700 transition hover:text-gray-700/75" to="/contact"> Contatti </NavLink>
+        <NavLink onClick={() => window.scrollTo({ top: 0 })} className="text-gray-700 transition hover:text-gray-700/75" to="/contact"> Contatti </NavLink>
       </li>
     </ul>
 
