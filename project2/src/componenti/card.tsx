@@ -19,7 +19,6 @@ function Card({ id, nomeProdotto, prezzoProdotto, imgProdotto }: CardProp) {
   const prodotto = prodottiJSON.find((x) => x.id == id)
   const { currentUser, togglePreferito } = useAuth()
 
-  // 🔥 Controllo se il prodotto è già nei preferiti
   const èPreferito = currentUser?.preferiti?.some((p: any) => p.id === id)
 
   useEffect(() => {
@@ -46,7 +45,6 @@ function Card({ id, nomeProdotto, prezzoProdotto, imgProdotto }: CardProp) {
     setTaglia(tagliaSelezionata)
   }
 
-  // ❤️ Aggiungi/rimuovi dai preferiti
   function handleTogglePreferito(e) {
     e.stopPropagation()
     e.preventDefault()
@@ -65,7 +63,6 @@ function Card({ id, nomeProdotto, prezzoProdotto, imgProdotto }: CardProp) {
 
   return (
     <div className="group relative block h-full p-3">
-      {/* ❤️ Pulsante preferiti */}
       <button
         className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:scale-110"
         onClick={handleTogglePreferito}

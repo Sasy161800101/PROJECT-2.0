@@ -10,6 +10,14 @@ function FormRegistrazione() {
     const [confirmPassword, setConfirmPassword] = useState("")
     const {registrazioneUtente} = useAuth()
 
+    function validateEmail(email: string) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!regex.test(email)) {
+          return "Inserisci un indirizzo email valido"
+        }
+        return ""
+      }
+
     function validatePassword(pwd: string) {
         if (pwd.length < 8) return "La password deve avere almeno 8 caratteri"
         if (!/[A-Z]/.test(pwd)) return "La password deve contenere almeno una lettera maiuscola"
@@ -39,6 +47,12 @@ function FormRegistrazione() {
         }
         if (user.password !== confirmPassword) {
           toast.error("Le password non coincidono")
+          return
+        }
+
+        const emailError = validateEmail(user.email)
+        if (emailError) {
+          toast.error(emailError)
           return
         }
 
@@ -100,7 +114,7 @@ function FormRegistrazione() {
               outline: "none",
               transition: "0.2s",
             }}
-             type="email" name="email" placeholder="inserisci email" onChange={handleChange} required></input>
+             type="text" name="email" placeholder="inserisci email" onChange={handleChange}></input>
         <input  style={{
               padding: "12px 15px",
               borderRadius: "8px",
