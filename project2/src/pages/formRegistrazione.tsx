@@ -96,7 +96,7 @@ function FormRegistrazione() {
               outline: "none",
               transition: "0.2s",
             }}
-             type="text" name="nome" placeholder="inserisci nome" onChange={handleChange} required></input>
+             type="text" name="nome" placeholder="inserisci nome" onChange={handleChange}></input>
         <input  style={{
               padding: "12px 15px",
               borderRadius: "8px",
@@ -105,7 +105,7 @@ function FormRegistrazione() {
               outline: "none",
               transition: "0.2s",
             }}
-             type="text" name="cognome" placeholder="inserisci cognome" onChange={handleChange} required></input>
+             type="text" name="cognome" placeholder="inserisci cognome" onChange={handleChange}></input>
         <input  style={{
               padding: "12px 15px",
               borderRadius: "8px",
@@ -123,13 +123,13 @@ function FormRegistrazione() {
               outline: "none",
               transition: "0.2s",
             }}
-             type="password" name="password" placeholder="inserisci password" onChange={handleChange} required></input>
+             type="password" name="password" placeholder="inserisci password" onChange={handleChange}></input>
         <input style={{
               padding: "12px 15px",
               borderRadius: "8px", border: "1px solid #ccc",
               fontSize: "16px" 
             }}
-              type="password" name="confirmPassword" placeholder="Conferma password" onChange={handleChange} required />
+              type="password" name="confirmPassword" placeholder="Conferma password" onChange={handleChange} />
         <button style={{
               backgroundColor: "#0d9488",
               color: "white",
